@@ -7,7 +7,7 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/addCourse').post((req, res) => {
+router.route('/add-course').post((req, res) => {
   const title = req.body.title;
   const description = req.body.description;
   const duration = Number(req.body.duration);
@@ -25,17 +25,17 @@ router.route('/addCourse').post((req, res) => {
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').get((req, res) => {
+router.route('/courses/:id').get((req, res) => {
   Course.findById(req.params.id)
     .then(course => res.json(course))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').delete((req, res) => {
-  Course.findByIdAndDelete(req.params.id)
-    .then(() => res.json('Course deleted.'))
-    .catch(err => res.status(400).json('Error: ' + err));
-});
+// router.route('/:id').delete((req, res) => {
+//   Course.findByIdAndDelete(req.params.id)
+//     .then(() => res.json('Course deleted.'))
+//     .catch(err => res.status(400).json('Error: ' + err));
+// });
 
 
 module.exports = router;

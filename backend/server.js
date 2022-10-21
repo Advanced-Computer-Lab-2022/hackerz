@@ -19,7 +19,7 @@ const adminRouter = require('./routes/admin');
 const instructorRouter = require('./routes/instructor');
 
 app.use('/admin', adminRouter);
-app.use('/users', instructorRouter);
+app.use('/instructor', instructorRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
