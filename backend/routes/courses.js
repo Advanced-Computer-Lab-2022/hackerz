@@ -7,7 +7,8 @@ router.route('/').get((req, res) => {
     const searchString = req.query.query;
     const regExp = new RegExp(searchString,'i');  //case-insensitive regular expression
     if (searchString){
-        Course.find().or([{title: {$regex: regExp}},{instructor:{$regex: regExp}},{subject:{$regex: regExp}}]).limit(10)
+        Course.find()
+        .or([{title: {$regex: regExp}},{instructor:{$regex: regExp}},{subject:{$regex: regExp}}]).limit(10)
         .select(projection)
         .then(courses => res.json(courses))
         .catch(err => res.status(500).json('Error: ' + err));} 
