@@ -1,6 +1,5 @@
 const router = require('express').Router();
 let Course = require('../models/course.model');
-let User = require('../models/user.model');
 
 const projection = {_id:0, __v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
 
