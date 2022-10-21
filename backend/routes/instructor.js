@@ -8,7 +8,7 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/addCourse').post((req, res) => {
-  const title = req.body.username;
+  const title = req.body.title;
   const description = req.body.description;
   const duration = Number(req.body.duration);
   const dateAdded = Date.parse(req.body.date);
