@@ -37,19 +37,5 @@ router.route('/:id').delete((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/update/:id').post((req, res) => {
-  Course.findById(req.params.id)
-    .then(course => {
-      course.username = req.body.username;
-      course.description = req.body.description;
-      course.duration = Number(req.body.duration);
-      course.date = Date.parse(req.body.date);
-
-      course.save()
-        .then(() => res.json('Course updated!'))
-        .catch(err => res.status(400).json('Error: ' + err));
-    })
-    .catch(err => res.status(400).json('Error: ' + err));
-});
 
 module.exports = router;
