@@ -8,23 +8,40 @@ const projection = {_id:0, __v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
 //     .then(courses => res.json(courses))
 //     .catch(err => res.status(500).json('Error: ' + err));
 // });
-router.route('/:user/my-courses').get((req, res) => {
+router.route('/:user/my-courses').get( async (req, res) => {
     const searchString = req.query.query;
+    const rating = req.query.rating;
     const user = req.params.user;
     const regExp = new RegExp(searchString,'i');  //case-insensitive regular expression
+    var docs;
     if (searchString){
-        Course.find({instructorUsername: user})
+       docs = await Course.find({instructorUsername: user})
         .or([{title: {$regex: regExp}},{subject:{$regex: regExp}}]).limit(10)
-        .select(projection)
-        .then(courses => res.json(courses))
-        .catch(err => res.status(500).json('Error: ' + err));} 
+        .select(projection).catch(err => res.status(500).json('Error: ' + err));} 
     else {
-        Course.find({instructorUsername: user}).limit(10)
+      docs= await  Course.find({instructorUsername: user}).limit(10)
         .select(projection)
-        .then(courses => res.json(courses))
         .catch(err => res.status(500).json('Error: ' + err));
     }
+    if (rating){
+      if(rating === 'ascending'){
+       
+        //docs= Course.find().select(projection).limit(10).then( res.json(docs.map(doc=> doc.rating).sort())).catch(err => res.status(500).json('Error: ' + err));
+        docs.sort({rating:1});
+    
+      }
+     else 
+     {
+      if (rating === 'descending'){
+            docs.sort({rating:-1});
+      }
+     }
+    }
+    else{
+      
+    }
  });
+ 
 
 router.route('/:user/add-course').post((req, res) => {
   const title = req.body.title;
