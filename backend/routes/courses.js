@@ -1,7 +1,7 @@
 const router = require('express').Router();
 let Course = require('../models/course.model');
 
-const projection = {_id:0, __v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
+const projection = {_id:0, __v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0,title:1,duration:1,rating:1};
 
 router.route('/').get( async (req, res) => {
     const searchString = req.query.query;
@@ -12,6 +12,7 @@ router.route('/').get( async (req, res) => {
 
     const regExp = new RegExp(searchString,'i');  //case-insensitive regular expression
     var docs;
+
     if (searchString){
        docs = await Course.find()
         .or([{title: {$regex: regExp}},{instructor:{$regex: regExp}},{subject:{$regex: regExp}}]).limit(10)
@@ -46,6 +47,37 @@ router.route('/').get( async (req, res) => {
         else
         docs.sort({price:-1});
      }
+     /* if (price && rating)
+     {
+      if(price=="asc"){
+        if (rating == "asc"){
+          docs.sort({rating:1,price:1})
+        }
+        else if(rating=="desc")
+         docs.sort({rating:-1,price:1})
+      }
+      else  {
+          if (rating == "asc"){
+          docs.sort({rating:1,price:-1})
+        }
+         else if(rating=="desc")
+         docs.sort({rating:-1,price:-1})
+      }
+     }
+     else  if (price){
+        if (price=="asc"){
+            docs.sort({price:1});
+        }
+        else
+        docs.sort({price:-1});
+     }
+           if (rating){
+        if (rating=="asc"){
+            docs.sort({rating:1});
+        }
+        else
+        docs.sort({rating:-1});
+     }*/  // if (subject shoould only be found with this code ) 
      res.json(docs);
 });
 
