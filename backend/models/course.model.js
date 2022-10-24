@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const courseSchema = new Schema({
   title: { type: String, required: true },
+  rating: { type: Number, required: false },
   description: { type: String, required: true },
   duration: { type: Number, required: true },
   dateAdded: { type: Date, required: true },
