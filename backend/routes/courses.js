@@ -1,23 +1,35 @@
 const router = require('express').Router();
 let Course = require('../models/course.model');
-
+const {priceAsc,priceDesc} = require('../utilities/sorting');
 const projection = {_id:0, __v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
 
-router.route('/').get((req, res) => {
+router.route('/').get( async (req, res) => {
     const searchString = req.query.query;
     const regExp = new RegExp(searchString,'i');  //case-insensitive regular expression
+    const price = req.query.price ? (req.query.price === "asc" ? 1 : -1 ) : undefined;
+    const rating = req.query.rating ? parseInt(req.query.rating) : undefined;
+    const subject = req.query.subject;
+    var docs; var newDocs;
+
     if (searchString){
-        Course.find()
-        .or([{title: {$regex: regExp}},{instructor:{$regex: regExp}},{subject:{$regex: regExp}}]).limit(10)
+        docs = await Course.find()
+        .or([{title: {$regex: regExp}},{instructorUsername:{$regex: regExp}},{subject:{$regex: regExp}}]).limit(10)
         .select(projection)
-        .then(courses => res.json(courses))
         .catch(err => res.status(500).json('Error: ' + err));} 
     else {
-        Course.find().limit(10)
+        docs = await Course.find().limit(10)
         .select(projection)
-        .then(courses => res.json(courses))
         .catch(err => res.status(500).json('Error: ' + err));
     }
+
+    docs = price ? (price === 1 ? docs.sort(priceAsc) : docs.sort(priceDesc)) : docs;  //sorting by price
+    
+    if (subject && rating) newDocs = docs.filter(course => course.subject === subject && course.rating === rating); //filtering
+    else if (subject) newDocs = docs.filter(course => course.subject === subject);
+    else if (rating) newDocs = docs.filter(course => course.rating === rating);
+    else newDocs = docs;
+
+    res.json(newDocs);
 });
 
 router.route('/:id').get((req, res) => {
