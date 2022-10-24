@@ -14,7 +14,11 @@ const userSchema = new Schema({
     type: String,
     // required: true,
     enum : ['admin','instructor','individualTrainee','corpTrainee','guest']
-},
+  },
+  country: {
+    type: String,
+    enum : ['Egypt', 'USA', 'Europe']
+  }
 }, {
   timestamps: true,
 });

@@ -8,7 +8,8 @@ const courseSchema = new Schema({
   duration: { type: Number, required: true },
   dateAdded: { type: Date, required: true },
   instructorUsername: {type: String, required: true},
-  subject: {type: String, required: true} 
+  subject: { type: String, required: true},
+  price: { type: Number, required: true}
 }, {
   timestamps: true,
 });

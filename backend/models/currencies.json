@@ -1,5 +1,9 @@
 {
- "Egypt": "LE",
- "USA": "Dollars",
- "Europe": "Euros"
+ "Egypt": 1,
+ "USA": 19,
+ "Europe": 19,
+ "UK": 22,
+ "India": 0.25,
+ "UAE": 5,
+ "KSA": 5
 }
