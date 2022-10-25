@@ -1,13 +1,11 @@
 const router = require('express').Router();
 let Course = require('../models/course.model');
-const {priceAsc,priceDesc} = require('../utilities/sorting');
 const projection = {_id:0, __v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0, price: 0};
 
 
 router.route('/courses').get( async (req, res) => {
     const searchString = req.query.query;
     const regExp = new RegExp(searchString,'i');  //case-insensitive regular expression
-    const price = req.query.price ? (req.query.price === "asc" ? 1 : -1 ) : undefined;
     const rating = req.query.rating ? parseInt(req.query.rating) : undefined;
     const subject = req.query.subject;
     var docs; var newDocs;
@@ -24,8 +22,6 @@ router.route('/courses').get( async (req, res) => {
     }
     
 
-    docs = price ? (price === 1 ? docs.sort(priceAsc) : docs.sort(priceDesc)) : docs;  //sorting by price
-    
     if (subject && rating) newDocs = docs.filter(course => course.subject === subject && course.rating === rating); //filtering
     else if (subject) newDocs = docs.filter(course => course.subject === subject);
     else if (rating) newDocs = docs.filter(course => course.rating === rating);
