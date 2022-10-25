@@ -42,6 +42,35 @@ router.route('/:username').get((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
   });
 
+  router.route('/:user/my-courses').get( async (req, res) => {
+    const searchString = req.query.query;
+    const user = req.params.user;
+    const regExp = new RegExp(searchString,'i');  //case-insensitive regular expression
+    const minPrice = req.query.minPrice ? parseInt(req.query.minPrice) : undefined;
+    const maxPrice = req.query.maxPrice ? parseInt(req.query.maxPrice) : undefined;
+    const subject = req.query.subject;
+    var docs; var newDocs; var filteredDocs;
 
+    if (searchString){
+        docs = await Course.find({instructorUsername: user})
+        .or([{title: {$regex: regExp}},{subject:{$regex: regExp}}]).limit(10)
+        .select(projection)
+        .catch(err => res.status(500).json('Error: ' + err));} 
+    else {
+        docs = await Course.find({instructorUsername: user}).limit(10)
+        .select(projection)
+        .catch(err => res.status(500).json('Error: ' + err));
+    }
+
+    if (subject) newDocs = docs.filter(course => course.subject === subject); //filtering
+    else newDocs = docs;
+
+    if (minPrice && maxPrice) filteredDocs = newDocs.filter(course => course.price >= minPrice && course.price <= maxPrice);
+    else if (minPrice) filteredDocs = newDocs.filter(course => course.price >= minPrice);
+    else if (maxPrice) filteredDocs = newDocs.filter(course => course.price <= maxPrice);
+    else filteredDocs = newDocs;
+    res.json(filteredDocs);
+
+ });
 
 module.exports = router;
