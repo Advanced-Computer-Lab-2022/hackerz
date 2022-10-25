@@ -1,15 +1,15 @@
 const router = require('express').Router();
 let Course = require('../models/course.model');
-const {priceAsc,priceDesc} = require('../utilities/sorting');
 const projection = {_id:0, __v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
 
 router.route('/').get( async (req, res) => {
     const searchString = req.query.query;
     const regExp = new RegExp(searchString,'i');  //case-insensitive regular expression
-    const price = req.query.price ? (req.query.price === "asc" ? 1 : -1 ) : undefined;
+    const minPrice = req.query.minPrice ? parseInt(req.query.minPrice) : undefined;
+    const maxPrice = req.query.maxPrice ? parseInt(req.query.maxPrice) : undefined;
     const rating = req.query.rating ? parseInt(req.query.rating) : undefined;
     const subject = req.query.subject;
-    var docs; var newDocs;
+    var docs; var newDocs; var filteredDocs;
 
     if (searchString){
         docs = await Course.find()
@@ -21,15 +21,18 @@ router.route('/').get( async (req, res) => {
         .select(projection)
         .catch(err => res.status(500).json('Error: ' + err));
     }
-
-    docs = price ? (price === 1 ? docs.sort(priceAsc) : docs.sort(priceDesc)) : docs;  //sorting by price
     
     if (subject && rating) newDocs = docs.filter(course => course.subject === subject && course.rating === rating); //filtering
     else if (subject) newDocs = docs.filter(course => course.subject === subject);
     else if (rating) newDocs = docs.filter(course => course.rating === rating);
     else newDocs = docs;
 
-    res.json(newDocs);
+    if (minPrice && maxPrice) filteredDocs = newDocs.filter(course => course.price >= minPrice && course.price <= maxPrice);
+    else if (minPrice) filteredDocs = newDocs.filter(course => course.price >= minPrice);
+    else if (maxPrice) filteredDocs = newDocs.filter(course => course.price <= maxPrice);
+    else filteredDocs = newDocs;
+
+    res.json(filteredDocs);
 });
 
 router.route('/:id').get((req, res) => {

@@ -8,22 +8,35 @@ const projection = {_id:0, __v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
 //     .then(courses => res.json(courses))
 //     .catch(err => res.status(500).json('Error: ' + err));
 // });
-router.route('/:user/my-courses').get((req, res) => {
+router.route('/:user/my-courses').get( async (req, res) => {
     const searchString = req.query.query;
     const user = req.params.user;
     const regExp = new RegExp(searchString,'i');  //case-insensitive regular expression
+    const minPrice = req.query.minPrice ? parseInt(req.query.minPrice) : undefined;
+    const maxPrice = req.query.maxPrice ? parseInt(req.query.maxPrice) : undefined;
+    const subject = req.query.subject;
+    var docs; var newDocs; var filteredDocs;
+
     if (searchString){
-        Course.find({instructorUsername: user})
+        docs = await Course.find({instructorUsername: user})
         .or([{title: {$regex: regExp}},{subject:{$regex: regExp}}]).limit(10)
         .select(projection)
-        .then(courses => res.json(courses))
         .catch(err => res.status(500).json('Error: ' + err));} 
     else {
-        Course.find({instructorUsername: user}).limit(10)
+        docs = await Course.find({instructorUsername: user}).limit(10)
         .select(projection)
-        .then(courses => res.json(courses))
         .catch(err => res.status(500).json('Error: ' + err));
     }
+
+    if (subject) newDocs = docs.filter(course => course.subject === subject); //filtering
+    else newDocs = docs;
+
+    if (minPrice && maxPrice) filteredDocs = newDocs.filter(course => course.price >= minPrice && course.price <= maxPrice);
+    else if (minPrice) filteredDocs = newDocs.filter(course => course.price >= minPrice);
+    else if (maxPrice) filteredDocs = newDocs.filter(course => course.price <= maxPrice);
+    else filteredDocs = newDocs;
+    res.json(filteredDocs);
+
  });
 
 router.route('/:user/add-course').post((req, res) => {
