@@ -24,3 +24,6 @@ app.use('/instructor', instructorRouter);
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
+
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, './.env') });
