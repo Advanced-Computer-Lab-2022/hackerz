@@ -35,4 +35,10 @@ router.route('/courses').get( async (req, res) => {
 
 });
 
+router.route('/courses/:id').get((req, res) => {
+    Course.findById(req.params.id).select(projection)
+      .then(course => res.json(course))
+      .catch(err => res.status(500).json('Error: ' + err));
+});
+
 module.exports = router;
