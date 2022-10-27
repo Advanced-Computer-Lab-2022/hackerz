@@ -12,12 +12,14 @@ const userSchema = new Schema({
   },
   userType: {
     type: String,
-    // required: true,
+    required: true,
     enum : ['admin','instructor','individualTrainee','corpTrainee','guest']
   },
   country: {
     type: String,
-    enum : ['Egypt', 'USA', 'Europe']
+    required: true,
+    enum : ['Egypt', 'USA', 'Germany', 'France', 'Italy',
+    'Spain', 'UK', 'India', 'UAE', 'KSA']
   }
 }, {
   timestamps: true,

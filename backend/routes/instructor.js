@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const currency_converter = require('currency-converter');
 let Course = require('../models/course.model');
 let User = require('../models/user.model');
 let currencies = require('../models/currencies.json');
@@ -68,18 +67,25 @@ router.route('/:user/add-course').post(async (req, res) => {
   }
 });
 
-router.route('/:user/:course').get( async (req, res) => {
+/*router.route('/:user/:course').get(async (req, res) => {
   let this_course = await Course.find({
     title: req.params.course,
     instructorUsername: req.params.user
   });
-  //let me = User.find({username: req.params.user});
+  res.redirect('/:user/change-country');
   const courses = Object.values(this_course).map((this_course) =>({
     price: this_course.price
   }));
   let new_price = courses[0].price / currencies[req.body.country];
   res.json(new_price);
 });
+
+/*router.route('/:user/change-country').post(async (req, res) => {
+  await User.findOneAndUpdate (
+    {username: req.params.user},
+    {country: req.body.country}
+  );
+});*/
 
 // router.route('/:id').get((req, res) => {
 //   Course.findById(req.params.id)

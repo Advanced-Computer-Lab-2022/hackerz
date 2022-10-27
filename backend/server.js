@@ -6,6 +6,8 @@ require('dotenv').config({ path: path.resolve(__dirname, './.env') });
 const app = express();
 const port = process.env.PORT || 5000;
 
+let User = require('./models/user.model');
+
 app.use(cors());
 app.use(express.json());
 
@@ -23,6 +25,14 @@ const coursesRouter = require('./routes/courses');
 app.use('/admin', adminRouter);
 app.use('/instructor', instructorRouter);
 app.use('/courses', coursesRouter);
+
+app.put('/:user/change-country', async (req, res) => {
+  await User.findOneAndUpdate (
+    {username: req.params.user},
+    {country: req.body.country}
+  );
+  res.redirect('back');
+});
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

@@ -1,7 +1,10 @@
 {
  "Egypt": 1,
  "USA": 19,
- "Europe": 19,
+ "Germany": 19,
+ "Italy": 19,
+ "France": 19,
+ "Spain": 19,
  "UK": 22,
  "India": 0.25,
  "UAE": 5,
