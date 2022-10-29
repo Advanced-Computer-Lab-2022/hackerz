@@ -1,61 +1,43 @@
 import React, {useEffect, useState, useRef} from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CoursesList from './components/CoursesList';
+import Search from './components/Search';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
 
 function App() {
-  const [courses, setCourses] = useState([]);
-  const searchRef = useRef();
-  const minPriceRef = useRef();
-  const maxPriceRef = useRef();
-  const subjectRef = useRef();
-  const ratingRef = useRef();
   
-  const searchCourses = async () => {
-    const query = searchRef.current.value;
-    const minPrice = minPriceRef.current.value;
-    const maxPrice = maxPriceRef.current.value;
-    const subject = subjectRef.current.value;
-    const rating = ratingRef.current.value;
-
-    const params = { query, minPrice, maxPrice, subject, rating}
-    
-    const response = await axios.get(APIURL + '/courses',
-     { params })
-    const data = response.data;
-    console.log(data); //testing purposes
-    setCourses(data);
-  }
- 
- 
-  useEffect(() => {
-    searchCourses();
-  },[])
-
   return (
     <div>
+       <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="/">Hackerz</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/search">Search</Nav.Link>
+            <Nav.Link href="/admin">Admin</Nav.Link>
+            <Nav.Link href="/instructor">Instructor</Nav.Link>
+
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/'/>
+          <Route path='/search' element={<Search/>}/>
+        </Routes>
+      </BrowserRouter>
       
-        <input ref={searchRef} placeholder="Search" type="search"/>
-        <button onClick={searchCourses}>Search</button> <br/>
-        <input ref={minPriceRef} placeholder="Minimum Price" type="number"/>
-        <input ref={maxPriceRef} placeholder="Maxmimum Price" type="number"/>
-        <br/><input ref={subjectRef} placeholder="Subject" type="text"/>
-        <input ref={ratingRef} placeholder="Rating" type="number" min="1" max="5"/>
-        
-        
-      <h1>Search Results:</h1>
-      <hr></hr>
-      {
-        courses?.length > 0 ? (
-          <div>
-            <CoursesList courses = {courses}/>
-          </div>
-        ) : (
-          <div>
-            <h2>No Courses Found</h2>
-          </div>
-        )
-      }
     </div>
   );
 }
