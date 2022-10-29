@@ -32,14 +32,13 @@ function Search() {
   },[])
 
   return (
-    <div>
-        <br/>
-        <input ref={searchRef} placeholder="Search" type="search"/>
+    <div className="m-3">
+        <input className="m-1" ref={searchRef} placeholder="Search" type="search"/>
         <button onClick={searchCourses}>Search</button> <br/><br/>
-        <input ref={minPriceRef} placeholder="Minimum Price" type="number"/>
-        <input ref={maxPriceRef} placeholder="Maxmimum Price" type="number"/>
-        <input ref={subjectRef} placeholder="Subject" type="text"/>
-        <input ref={ratingRef} placeholder="Rating" type="number" min="1" max="5"/><br/><br/>
+        <input className="m-1" ref={minPriceRef} placeholder="Minimum Price" type="number"/>
+        <input className="m-1" ref={maxPriceRef} placeholder="Maxmimum Price" type="number"/>
+        <input className="m-1" ref={subjectRef} placeholder="Subject" type="text"/>
+        <input className="m-1" ref={ratingRef} placeholder="Rating" type="number" min="1" max="5"/><br/><br/>
         
         
       <h2>Search Results:</h2>
