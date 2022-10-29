@@ -8,6 +8,7 @@ export default function Course({course}) {
         { course.price ? (course.price === 0 ?
          <span style={{color: "red"}}> (FREE)</span> 
          : <> for ${course.price}</>):<></>}
+         <p>Description: {course.description}</p>
         <hr></hr>
     </div>
   )
