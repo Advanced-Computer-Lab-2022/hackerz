@@ -1,6 +1,5 @@
 const router = require('express').Router();
 let Course = require('../models/course.model');
-let User = require('../models/user.model');
 const projection = {__v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
 
 router.route('/').get( async (req, res) => {
