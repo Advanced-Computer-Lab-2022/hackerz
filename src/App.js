@@ -44,6 +44,7 @@ function App() {
         
         
       <h1>Search Results:</h1>
+      <hr></hr>
       {
         courses?.length > 0 ? (
           <div>

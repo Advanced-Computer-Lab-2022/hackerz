@@ -3,7 +3,9 @@ import React from 'react'
 export default function Course({course}) {
   return (
     <div>
-        <h2>{course.title} by {course.instructorUsername} for ${course.price}</h2>
+        <a href="#">{course.title}</a> by {course.instructorUsername} 
+        {course.price === 0 ? <span style={{color: "red"}}> (FREE)</span> : <> for ${course.price}</>}
+        <hr></hr>
     </div>
   )
 }
