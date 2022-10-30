@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Bree Serif';
+}
+
+body {
+  background: #f0f0f0;
+}
+
+a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: #0000ee
+}
+
+.app {
+  background: #fff;
+  margin: 25px auto;
+  padding: 25px;
+  max-width: 800px;
+  width: 95%;
+}
+
+input.rat{
+    width: 70px;
+}
+
+#basic-nav-dropdown{
+    color: #0000ee;
+    
+}
+
+
+
+
+

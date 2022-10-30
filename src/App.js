@@ -8,11 +8,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import './style.css';
 
 
 function App() {
-  const [user, setUser] = useState({username: ""}); //for testing purposes, user is always beedoz
+  const [user, setUser] = useState({username: ""});
   const usernameRef = useRef();
 
   const login = async () => {
@@ -29,17 +29,14 @@ function App() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />  
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            
-            <NavLink to="/">Home</NavLink>&nbsp;&nbsp;
-            
-            <NavLink to="/corp">Corporate</NavLink>&nbsp;&nbsp;
-            
-            <NavLink to="/search">Search</NavLink>&nbsp;&nbsp;
+            <NavLink className="vertical-center" to="/">Home</NavLink>&nbsp;&nbsp;
+            <NavLink className="vertical-center" to="/corp">Corporate</NavLink>&nbsp;&nbsp;
+            <NavLink className="vertical-center" to="/search">Search</NavLink>&nbsp;&nbsp;
             <NavDropdown title="Instructor" id="basic-nav-dropdown">
               <NavLink to="/instructor/my-courses">View My Courses</NavLink><br/>
               <NavLink to="/instructor/add-course">Add New Course</NavLink>
             </NavDropdown>
-            <NavDropdown title="Admin" id="basic-nav-dropdown">
+            <NavDropdown  title="Admin" id="basic-nav-dropdown">
               <NavLink to="/admin/add-admin">Add Another Admin</NavLink><br/>
               <NavLink to="/admin/add-corp">Add Corporate Trainee</NavLink><br/>
               <NavLink to="/admin/add-instructor">Add Instructor</NavLink><br/>

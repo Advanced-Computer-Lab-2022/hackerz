@@ -32,7 +32,7 @@ function CorpCourses() {
         <input className="m-1" ref={searchRef} placeholder="Search" type="search"/>
         <button onClick={searchCourses}>Search</button>
         <input className="m-2" ref={subjectRef} placeholder="Subject" type="text"/>
-        <input className="m-1" ref={ratingRef} placeholder="Rating" type="number" min="1" max="5"/><br/><br/>
+        <input className="m-1 rat" ref={ratingRef} placeholder="Rating" type="number" min="1" max="5"/><br/><br/>
         
         
       <h2>Search Results:</h2>
