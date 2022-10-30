@@ -2,7 +2,7 @@ import React, {useState, useRef } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Search from './components/Search';
 import InstructorCourses from './components/InstructorCourses';
-import Home from './components/Home';
+import CorpCourses from './components/CorpCourses';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -42,19 +42,19 @@ function App() {
               <NavDropdown.Item href="/admin/add-instructor">Add Instructor</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          
-          <input className="m-1" ref={usernameRef} placeholder="Search" type="search"/>
-          <button onClick={login}>Login</button>
-
+          <input className="m-2" ref={usernameRef} placeholder="Search" type="search"/>
+          <button className="m-2" onClick={login}>Login</button>
           <Navbar.Text>Hello, {user.username ? user.username : "Guest"}</Navbar.Text>
+          
         </Navbar.Collapse>
       </Container>
     </Navbar>
     <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Home/>}/>
+          <Route path='/'/>
           <Route path='/search' element={<Search/>}/>
           <Route path='/instructor/my-courses' element={<InstructorCourses user={user}/>}/>
+          <Route path='/corp' element={<CorpCourses/>}/>
         </Routes>
       </BrowserRouter>
     </div>
