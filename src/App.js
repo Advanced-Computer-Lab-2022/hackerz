@@ -1,5 +1,5 @@
 import React, {useState, useRef } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom';
 import Search from './components/Search';
 import InstructorCourses from './components/InstructorCourses';
 import CorpCourses from './components/CorpCourses';
@@ -10,46 +10,49 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
+
 function App() {
-  const [user, setUser] = useState({username: "beedoz"}); //for testing purposes, user is always beedoz
+  const [user, setUser] = useState({username: ""}); //for testing purposes, user is always beedoz
   const usernameRef = useRef();
-  
+
   const login = async () => {
     const username = usernameRef.current.value;
     setUser({username: username})
   }
 
-
-
   return (
     <div>
+      <BrowserRouter>
       <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand href="/">Hackerz</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />  
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/search">Search</Nav.Link>
-            <Nav.Link href="/corp">Corporate</Nav.Link>
+            
+            <NavLink to="/">Home</NavLink>&nbsp;&nbsp;
+            
+            <NavLink to="/corp">Corporate</NavLink>&nbsp;&nbsp;
+            
+            <NavLink to="/search">Search</NavLink>&nbsp;&nbsp;
             <NavDropdown title="Instructor" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/instructor/my-courses">View My Courses</NavDropdown.Item>
-              <NavDropdown.Item href="/instructor/add-course">Add New Course</NavDropdown.Item>
+              <NavLink to="/instructor/my-courses">View My Courses</NavLink><br/>
+              <NavLink to="/instructor/add-course">Add New Course</NavLink>
             </NavDropdown>
             <NavDropdown title="Admin" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/admin/add-admin">Add Another Admin</NavDropdown.Item>
-              <NavDropdown.Item href="/admin/add-corp">Add Corporate Trainee</NavDropdown.Item>
-              <NavDropdown.Item href="/admin/add-instructor">Add Instructor</NavDropdown.Item>
+              <NavLink to="/admin/add-admin">Add Another Admin</NavLink><br/>
+              <NavLink to="/admin/add-corp">Add Corporate Trainee</NavLink><br/>
+              <NavLink to="/admin/add-instructor">Add Instructor</NavLink><br/>
+              
             </NavDropdown>
           </Nav>
           <input className="m-2" ref={usernameRef} placeholder="Username" type="search"/>
           <button className="m-2" onClick={login}>Login</button>
           <Navbar.Text>Hello, {user.username ? user.username : "Guest"}</Navbar.Text>
-          
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    <BrowserRouter>
+    
         <Routes>
           <Route path='/'/>
           <Route path='/search' element={<Search/>}/>
