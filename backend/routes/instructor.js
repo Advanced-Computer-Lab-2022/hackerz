@@ -1,7 +1,7 @@
 const router = require('express').Router();
 let Course = require('../models/course.model');
 
-const projection = {_id:0, __v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
+const projection = {__v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
 
 // router.route('/').get((req, res) => {
 //   Course.find()

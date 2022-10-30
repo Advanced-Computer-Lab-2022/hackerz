@@ -3,28 +3,21 @@ import CoursesList from './CoursesList';
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
 
-function Search() {
+function InstructorCourses({user}) {
   const [courses, setCourses] = useState([]);
   const searchRef = useRef();
-  const minPriceRef = useRef();
-  const maxPriceRef = useRef();
   const subjectRef = useRef();
-  const ratingRef = useRef();
-  
+  const username = user.username;
   const searchCourses = async () => {
     const query = searchRef.current.value;
-    const minPrice = minPriceRef.current.value;
-    const maxPrice = maxPriceRef.current.value;
     const subject = subjectRef.current.value;
-    const rating = ratingRef.current.value;
-
-    const params = { query, minPrice, maxPrice, subject, rating}
-    const response = await axios.get(APIURL + '/courses', { params })
+    const params = { query, subject }
+    const response = await axios.get(APIURL + '/instructor/'+ username + '/my-courses', { params })
     const data = response.data;
     console.log(data); //testing purposes
+    console.log(user)
     setCourses(data);
   }
- 
  
   useEffect(() => {
     searchCourses();
@@ -33,12 +26,8 @@ function Search() {
   return (
     <div className="m-3">
         <input className="m-1" ref={searchRef} placeholder="Search" type="search"/>
-        <button onClick={searchCourses}>Search</button> <br/><br/>
-        <input className="m-1" ref={minPriceRef} placeholder="Minimum Price" type="number"/>
-        <input className="m-1" ref={maxPriceRef} placeholder="Maxmimum Price" type="number"/>
-        <input className="m-1" ref={subjectRef} placeholder="Subject" type="text"/>
-        <input className="m-1" ref={ratingRef} placeholder="Rating" type="number" min="1" max="5"/><br/><br/>
-        
+        <button onClick={searchCourses}>Search</button> 
+        <input className="m-4" ref={subjectRef} placeholder="Subject" type="text"/><br/>
         
       <h2>Search Results:</h2>
       <hr></hr>
@@ -57,4 +46,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default InstructorCourses;
