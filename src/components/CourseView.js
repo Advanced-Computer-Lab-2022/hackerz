@@ -26,9 +26,9 @@ export default function CourseView(props) {
       <Card.Header><strong>{course.title} by {course.instructorUsername}</strong></Card.Header>
       <Card.Body>
         <Card.Title>{course.description}</Card.Title><br/>
-        <Card.Text>
-          Subtitles: 
-        </Card.Text>
+        {
+        course.subtitles?.length > 0 ?
+        <Card.Text>Subtitles: </Card.Text>:<></>}
         <ListGroup as="ol" numbered>
         {
         course.subtitles?.length > 0 ? (
@@ -50,7 +50,6 @@ export default function CourseView(props) {
           </div>
         ) : (
           <div>
-            <h2>No Courses Found</h2>
           </div>
         )}
     </ListGroup>
