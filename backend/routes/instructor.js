@@ -42,19 +42,18 @@ router.route('/:user/my-courses').get( async (req, res) => {
 router.route('/:user/add-course').post((req, res) => {
   const title = req.body.title;
   const description = req.body.description;
-  const duration = Number(req.body.duration);
-//   const dateAdded = Date.parse(req.body.date)
-  const dateAdded = Date.now();
   const instructorUsername = req.params.user;
   const subject = req.body.subject;
+  const price = req.body.price;
+  const subtitles = req.body.subtitles;
 
   const newCourse = new Course({
     title,
     description,
-    duration,
-    dateAdded,
     instructorUsername,
-    subject
+    subject,
+    price,
+    subtitles
   });
 
   newCourse.save()

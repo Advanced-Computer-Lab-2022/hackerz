@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom';
 import Search from './components/Search';
 import InstructorCourses from './components/InstructorCourses';
 import CorpCourses from './components/CorpCourses';
+import CourseView from './components/CourseView';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -55,6 +56,7 @@ function App() {
           <Route path='/search' element={<Search/>}/>
           <Route path='/instructor/my-courses' element={<InstructorCourses user={user}/>}/>
           <Route path='/corp' element={<CorpCourses/>}/>
+          <Route path='/course/:id' element={<CourseView/>}/>
         </Routes>
       </BrowserRouter>
     </div>
