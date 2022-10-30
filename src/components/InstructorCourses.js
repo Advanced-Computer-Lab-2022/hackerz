@@ -5,6 +5,7 @@ const APIURL = "http://localhost:5000";
 
 function InstructorCourses({user}) {
   const [courses, setCourses] = useState([]);
+  const corp = {corp:true}
   const searchRef = useRef();
   const subjectRef = useRef();
   const username = user.username;
@@ -34,7 +35,7 @@ function InstructorCourses({user}) {
       {
         courses?.length > 0 ? (
           <div>
-            <CoursesList courses = {courses}/>
+            <CoursesList courses = {courses} corp = {corp}/>
           </div>
         ) : (
           <div>
