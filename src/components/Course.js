@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
+import { NavLink } from 'react-router-dom';
 
 export default function Course(props) {
   const course = props.course;
@@ -9,10 +10,11 @@ export default function Course(props) {
       <Card style={{width:"20%"}}  
       className="m-1">
       <Card.Body>
-        <Card.Title>{course.title}</Card.Title>
+        <Card.Title>{course.subject}: {course.title}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">by {course.instructorUsername} </Card.Subtitle>
         <Card.Text>{course.description}</Card.Text>
-        <Card.Link href={link}>View Course</Card.Link>
+        
+        <NavLink to={link}>View Course</NavLink>
         {!corp.corp ?
          <Card.Footer className="text-muted">{
             course.price ? (course.price === 0 ?
