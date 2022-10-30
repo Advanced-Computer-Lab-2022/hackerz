@@ -42,7 +42,7 @@ function App() {
               <NavDropdown.Item href="/admin/add-instructor">Add Instructor</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <input className="m-2" ref={usernameRef} placeholder="Search" type="search"/>
+          <input className="m-2" ref={usernameRef} placeholder="Username" type="search"/>
           <button className="m-2" onClick={login}>Login</button>
           <Navbar.Text>Hello, {user.username ? user.username : "Guest"}</Navbar.Text>
           
