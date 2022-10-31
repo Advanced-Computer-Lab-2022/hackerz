@@ -22,7 +22,7 @@ export default function CourseView(props) {
     },[])
 
     return (
-    <Card>
+    <Card className="mt-4 w-50 mx-auto">
       <Card.Header><strong>{course.title} by {course.instructorUsername}</strong></Card.Header>
       <Card.Body>
         <Card.Title>{course.description}</Card.Title><br/>
@@ -34,27 +34,25 @@ export default function CourseView(props) {
         course.subtitles?.length > 0 ? (
           <div>
             {course.subtitles.map(subtitle => {
-            return <ListGroup.Item
-            as="li"
-            className="d-flex justify-content-between align-items-start"
-          >
-            <div className="ms-2 me-auto">
-            <div className="fw-bold">{subtitle.title}</div>
-              {subtitle.description}
+              return <ListGroup.Item
+              as="li" className="d-flex justify-content-between align-items-start">
+              <div className="ms-2 me-auto">
+              <div className="fw-bold">{subtitle.title}</div>
+                {subtitle.description}
+              </div>
+              <Badge bg="primary" pill>
+                {subtitle.duration} hours
+              </Badge>
+            </ListGroup.Item>
+          })}
             </div>
-            <Badge bg="primary" pill>
-              {subtitle.duration} hours
-            </Badge>
-          </ListGroup.Item>
-        })}
-          </div>
-        ) : (
-          <div>
-          </div>
-        )}
+          ) : (
+            <div>
+            </div>
+          )}
     </ListGroup>
       </Card.Body>
-      <Button variant="primary">Enroll in Course</Button>
+      <Button className="w-25 mx-auto mb-3" variant="primary">Enroll in Course</Button>
     </Card>
   )
 }

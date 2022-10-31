@@ -4,6 +4,7 @@ import Search from './components/Search';
 import InstructorCourses from './components/InstructorCourses';
 import CorpCourses from './components/CorpCourses';
 import CourseView from './components/CourseView';
+import AddCourse from './components/AddCourse';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -57,6 +58,8 @@ function App() {
           <Route path='/instructor/my-courses' element={<InstructorCourses user={user}/>}/>
           <Route path='/corp' element={<CorpCourses/>}/>
           <Route path='/course/:id' element={<CourseView/>}/>
+          <Route path='/instructor/add-course' element={<AddCourse user={user}/>}/>
+
         </Routes>
       </BrowserRouter>
     </div>
