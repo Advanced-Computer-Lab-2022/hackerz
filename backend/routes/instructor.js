@@ -48,7 +48,7 @@ router.route('/:user/add-course').post((req, res) => {
   const subtitles = req.body.subtitles;
 
   const newCourse = new Course({
-    title,
+    title,rating: 0,
     description,
     instructorUsername,
     subject,

@@ -10,7 +10,7 @@ export default function Course(props) {
     <Card style={{width:"18%"}} className="m-3">
       <Card.Body>
         <Card.Title>{course.subject}: {course.title}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">by {course.instructorUsername} </Card.Subtitle>
+        <Card.Subtitle className="mb-2 text-muted">by {course.instructorUsername} (Rating: {course.rating? course.rating : 0}/5)</Card.Subtitle>
         <Card.Text>{course.description}</Card.Text>
         <NavLink to={link}>View Course</NavLink>
         {!corp.corp ?
