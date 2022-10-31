@@ -19,12 +19,9 @@ function Search() {
     const subject = subjectRef.current.value;
     const rating = ratingRef.current.value;
     const country = my_country;
-
     const params = { query, minPrice, maxPrice, subject, rating, country }
-    
     const response = await axios.get(APIURL + '/courses', { params })
     const data = response.data;
-    //console.log(data); testing purposes
     setCourses(data);
   }
  

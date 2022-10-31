@@ -42,13 +42,13 @@ function App() {
               <NavLink to="/instructor/my-courses">View My Courses</NavLink><br/>
               <NavLink to="/instructor/add-course">Add New Course</NavLink>
             </NavDropdown>
-            <NavDropdown title = "Country" id="countries-dropdown">
-              <CountriesList countries = {countries}/>
-            </NavDropdown>
           </Nav>
           <input className="m-2" ref={usernameRef} placeholder="Username" type="search"/>
           <button className="m-2" onClick={login}>Login</button>
           <Navbar.Text className="mx-4">Hello, {user.username ? user.username : "Guest"}</Navbar.Text>
+            <NavDropdown title = "Country" id="countries-dropdown">
+              <CountriesList countries = {countries}/>
+            </NavDropdown>
         </Navbar.Collapse>
       </Container>
     </Navbar>

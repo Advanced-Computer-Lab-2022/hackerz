@@ -19,7 +19,7 @@ export default function Course(props) {
          <Card.Footer className="text-muted">{
             course.price ? (course.price === 0 ?
               <span style={{color: "red"}}>FREE</span> 
-              : <>for ${course.price}{countries[my_country].currency}</>):<></>}</Card.Footer>:<></>}
+              : <>for {countries[my_country].currency} {course.price}</>):<></>}</Card.Footer>:<></>}
       </Card.Body>
     </Card>
   )
