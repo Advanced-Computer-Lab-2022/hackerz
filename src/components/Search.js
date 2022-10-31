@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 import CoursesList from './CoursesList';
+import { my_country } from './Country';
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
 
@@ -17,11 +18,13 @@ function Search() {
     const maxPrice = maxPriceRef.current.value;
     const subject = subjectRef.current.value;
     const rating = ratingRef.current.value;
+    const country = my_country;
 
-    const params = { query, minPrice, maxPrice, subject, rating}
+    const params = { query, minPrice, maxPrice, subject, rating, country }
+    
     const response = await axios.get(APIURL + '/courses', { params })
     const data = response.data;
-    console.log(data); //testing purposes
+    //console.log(data); testing purposes
     setCourses(data);
   }
  

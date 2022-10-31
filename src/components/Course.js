@@ -1,6 +1,8 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
 import { NavLink } from 'react-router-dom';
+import countries from '../countries.json';
+import { my_country } from './Country';
 
 export default function Course(props) {
   const course = props.course;
@@ -17,7 +19,7 @@ export default function Course(props) {
          <Card.Footer className="text-muted">{
             course.price ? (course.price === 0 ?
               <span style={{color: "red"}}>FREE</span> 
-              : <>for ${course.price}</>):<></>}</Card.Footer>:<></>}
+              : <>for ${course.price}{countries[my_country].currency}</>):<></>}</Card.Footer>:<></>}
       </Card.Body>
     </Card>
   )

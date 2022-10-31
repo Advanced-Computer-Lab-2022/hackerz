@@ -10,6 +10,8 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import CountriesList from './components/CountriesList';
+import countries from './countries.json';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
@@ -36,12 +38,13 @@ function App() {
             <NavLink className="mx-2 vertical-center" to="/search">Search</NavLink>&nbsp;&nbsp;
             <NavLink className="mx-2 vertical-center" to="/admin">Admin</NavLink>&nbsp;&nbsp;
             <NavLink className="mx-2 vertical-center" to="/corp">Corporate</NavLink>&nbsp;&nbsp;
-            
             <NavDropdown title="Instructor" id="basic-nav-dropdown">
               <NavLink to="/instructor/my-courses">View My Courses</NavLink><br/>
               <NavLink to="/instructor/add-course">Add New Course</NavLink>
             </NavDropdown>
-           
+            <NavDropdown title = "Country" id="countries-dropdown">
+              <CountriesList countries = {countries}/>
+            </NavDropdown>
           </Nav>
           <input className="m-2" ref={usernameRef} placeholder="Username" type="search"/>
           <button className="m-2" onClick={login}>Login</button>
