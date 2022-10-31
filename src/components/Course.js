@@ -8,7 +8,7 @@ export default function Course(props) {
   const corp = props.corp;
   const link = "/course/" + course._id;
   return (
-    <Card style={{width:"18%"}} className="m-1">
+    <Card style={{width:"18%"}} className="m-3">
       <Card.Body>
         <Card.Title>{course.subject}: {course.title}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">by {course.instructorUsername} </Card.Subtitle>

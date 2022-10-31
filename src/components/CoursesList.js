@@ -9,7 +9,7 @@ export default function CoursesList(props) {
     const corp = props.corp ? props.corp : false;
     return (
         <div>  
-        <Row className="d-flex">
+        <Row className="d-flex mx-auto">
         { courses.map(course => {
             return <Course key={course._id} course={course} corp={corp}/>
         }) } 
