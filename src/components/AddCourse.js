@@ -45,12 +45,21 @@ export default function AddCourse({user}) {
                 {title: subtitle2Title, description: subtitle2Description, duration: subtitle2Duration },
                 {title: subtitle3Title, description: subtitle3Description, duration: subtitle3Duration }
             ]};
-            console.log(data)
-            const link = APIURL + '/instructor/' + user.username + "/add-course";
-            console.log(link)
-        const result = await axios.post(link, data);
-
-        console.log(result.data.data)
+        const link = APIURL + '/instructor/' + user.username + "/add-course";
+        await axios.post(link, data);
+        titleRef.current.value = "";
+        subjectRef.current.value = "";
+        priceRef.current.value = "";
+        descriptionRef.current.value = "";
+        subtitle1TitleRef.current.value = "";
+        subtitle2TitleRef.current.value = "";
+        subtitle3TitleRef.current.value = "";
+        subtitle1DurationRef.current.value = "";
+        subtitle2DurationRef.current.value = "";
+        subtitle3DurationRef.current.value = "";
+        subtitle1DescriptionRef.current.value = "";
+        subtitle2DescriptionRef.current.value = "";
+        subtitle3DescriptionRef.current.value = "";
         alert("Course Added")
     }
 

@@ -5,6 +5,7 @@ import InstructorCourses from './components/InstructorCourses';
 import CorpCourses from './components/CorpCourses';
 import CourseView from './components/CourseView';
 import AddCourse from './components/AddCourse';
+import AdminPanel from './components/AdminPanel';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -32,22 +33,19 @@ function App() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto mx-3">
             <NavLink className="mx-2 vertical-center" to="/">Home</NavLink>&nbsp;&nbsp;
-            <NavLink className="mx-2 vertical-center" to="/corp">Corporate</NavLink>&nbsp;&nbsp;
             <NavLink className="mx-2 vertical-center" to="/search">Search</NavLink>&nbsp;&nbsp;
+            <NavLink className="mx-2 vertical-center" to="/admin">Admin</NavLink>&nbsp;&nbsp;
+            <NavLink className="mx-2 vertical-center" to="/corp">Corporate</NavLink>&nbsp;&nbsp;
+            
             <NavDropdown title="Instructor" id="basic-nav-dropdown">
               <NavLink to="/instructor/my-courses">View My Courses</NavLink><br/>
               <NavLink to="/instructor/add-course">Add New Course</NavLink>
             </NavDropdown>
-            <NavDropdown  title="Admin" id="basic-nav-dropdown">
-              <NavLink to="/admin/add-admin">Add Another Admin</NavLink><br/>
-              <NavLink to="/admin/add-corp">Add Corporate Trainee</NavLink><br/>
-              <NavLink to="/admin/add-instructor">Add Instructor</NavLink><br/>
-              
-            </NavDropdown>
+           
           </Nav>
           <input className="m-2" ref={usernameRef} placeholder="Username" type="search"/>
           <button className="m-2" onClick={login}>Login</button>
-          <Navbar.Text>Hello, {user.username ? user.username : "Guest"}</Navbar.Text>
+          <Navbar.Text className="mx-4">Hello, {user.username ? user.username : "Guest"}</Navbar.Text>
         </Navbar.Collapse>
       </Container>
     </Navbar>
@@ -55,10 +53,11 @@ function App() {
         <Routes>
           <Route path='/'/>
           <Route path='/search' element={<Search/>}/>
-          <Route path='/instructor/my-courses' element={<InstructorCourses user={user}/>}/>
-          <Route path='/corp' element={<CorpCourses/>}/>
           <Route path='/course/:id' element={<CourseView/>}/>
+          <Route path='/corp' element={<CorpCourses/>}/>
+          <Route path='/instructor/my-courses' element={<InstructorCourses user={user}/>}/>
           <Route path='/instructor/add-course' element={<AddCourse user={user}/>}/>
+          <Route path='/admin' element={<AdminPanel/>}/>
 
         </Routes>
       </BrowserRouter>
