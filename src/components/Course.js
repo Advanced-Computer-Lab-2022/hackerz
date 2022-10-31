@@ -1,7 +1,6 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
 import { NavLink } from 'react-router-dom';
-import CourseView from './CourseView';
 
 export default function Course(props) {
   const course = props.course;
