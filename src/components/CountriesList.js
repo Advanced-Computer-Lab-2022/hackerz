@@ -8,11 +8,9 @@ export default function CountriesList({countries}) {
     return (
         <div>
         <ListGroup>
-        
         { Object.keys(countries).map(country => {
-            return <Country key={countries[country]} country={country}/>
+            return <Country key={country} country={country}/>
         }) }
-            
         </ListGroup>
         </div>
         

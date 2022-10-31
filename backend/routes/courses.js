@@ -23,9 +23,7 @@ router.route('/').get( async (req, res) => {
         .catch(err => res.status(500).json('Error: ' + err));
     }
 
-    //const countries = {EG: {ratio: 1, currency: "EGP"}, US: {ratio: 22.5, currency: "USD"}}
-    //console.log(req.query.country + '27');
-    var country = req.query.country; //just for testing
+    var country = req.query.country;
     for(var doc in docs){
         docs[doc].price = (docs[doc].price/countries[country].ratio).toFixed(2);
     }
