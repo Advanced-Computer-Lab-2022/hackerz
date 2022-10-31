@@ -1,5 +1,7 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
+import countries from '../countries.json';
+import { my_country } from './Country';
 
 export default function Course({course}) {
   const link = "/courses/" + course._id;
@@ -13,7 +15,7 @@ export default function Course({course}) {
         <Card.Link href={link}>View Course</Card.Link>
         <Card.Footer className="text-muted">{ course.price ? (course.price === 0 ?
          <span style={{color: "red"}}>(FREE)</span> 
-         : <>for {course.price} EGP</>):<></>}</Card.Footer>
+         : <>for {course.price} {countries[my_country].currency}</>):<></>}</Card.Footer>
       </Card.Body>
     </Card>
   )

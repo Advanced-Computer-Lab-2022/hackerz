@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Search from './components/Search';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -8,8 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CountriesList from './components/CountriesList';
 import countries from './countries.json';
 import { NavDropdown } from 'react-bootstrap';
-
-var flag = true;
 
 function App() {
   
@@ -42,14 +40,4 @@ function App() {
   );
 }
 
-function showCountries(countries, flag){
-  /*flag = !flag;
-  if(!flag){*/
-    return(
-      <CountriesList countries = {countries}/>
-    )
-  /*}
-  return;*/
-}
-// <Nav.Link onClick={(countries, flag => showCountries)}>Country</Nav.Link>
 export default App;
