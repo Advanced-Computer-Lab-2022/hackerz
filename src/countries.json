@@ -1,0 +1,9 @@
+{
+    "EG": {"ratio": 1, "currency": "EGP"}, 
+    "US": {"ratio": 22.5, "currency": "USD"},
+    "DE": {"ratio": 22.5, "currency": "EUR"},
+    "FR": {"ratio": 22.5, "currency": "EUR"},
+    "UK": {"ratio": 26.9, "currency": "GBP"},
+    "IT": {"ratio": 22.5, "currency": "EUR"},
+    "SP": {"ratio": 22.5, "currency": "EUR"}
+}

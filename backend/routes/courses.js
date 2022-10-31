@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let Course = require('../models/course.model');
+let countries = require('../../src/countries.json');
 const projection = {__v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
 
 router.route('/').get( async (req, res) => {
@@ -22,8 +23,9 @@ router.route('/').get( async (req, res) => {
         .catch(err => res.status(500).json('Error: ' + err));
     }
 
-    const countries = {EG: {ratio: 1, currency: "EGP"}, US: {ratio: 22.5, currency: "USD"}}
-    var country = "EG"; //just for testing
+    //const countries = {EG: {ratio: 1, currency: "EGP"}, US: {ratio: 22.5, currency: "USD"}}
+    console.log(req.query.country + '27');
+    var country = req.query.country; //just for testing
     for(var doc in docs){
         docs[doc].price = (docs[doc].price/countries[country].ratio).toFixed(2);
     }
