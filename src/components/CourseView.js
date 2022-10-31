@@ -18,7 +18,7 @@ export default function CourseView(props) {
         setCourse(data);
     }
     useEffect(() => {
-        fetchCourse();
+        fetchCourse(); // eslint-disable-next-line
     },[])
 
     return (
