@@ -64,7 +64,7 @@ export default function AddCourse({user}) {
     }
 
     return (
-    <Card className="mt-4 w-50 mx-auto">
+    <Card className="mt-4 w-50 mx-auto my-4">
       <Card.Header><strong>Add Course Form</strong></Card.Header>
       <Card.Body>
       <FloatingLabel
