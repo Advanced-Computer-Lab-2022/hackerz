@@ -7,14 +7,37 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(500).json('Error: ' + err));
 });
 
-router.route('/add').post((req, res) => {
-  const username = req.body.username;
+router.route('/addadmin').post(async( req,res) => {// addadmin?
+  var count = await User.countDocuments({userType: "admin"});
+  var username = "admin"+count++;// takes username from the body
+  const password = "admin123";
+  const newUser = new User({username,userType:'admin',password});// creates a new user
 
-  const newUser = new User({username});
-
-  newUser.save()
+  newUser.save() 
     .then(() => res.json('User added!'))
-    .catch(err => res.status(500).json('Error: ' + err));
+    .catch(err => res.json('Error: ' + err)); //adds it to db and if it fails it throws an error
+});
+
+//add another instructor
+router.route('/addinst').post((req, res) => {
+  const username = req.body.username;// takes username from the body
+  const password = req.body.password;
+  const newUser = new User({username,userType:'instructor', password});// creates a new user
+
+  newUser.save() 
+    .then(() => res.json('User added!'))
+    .catch(err => res.status(400).json('Error: ' + err)); //adds it to db and if it fails it throws an error
+});
+
+//add a corporate tranees
+router.route('/addcorp').post((req, res) => {
+  const username = req.body.username;// takes username from the body
+  const password = req.body.password;
+  const newUser = new User({username,userType:'corpTrainee', password});// creates a new user
+
+  newUser.save() 
+    .then(() => res.json('User added!'))
+    .catch(err => res.status(400).json('Error: ' + err)); //adds it to db and if it fails it throws an error
 });
 
 module.exports = router;

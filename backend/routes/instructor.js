@@ -12,18 +12,22 @@ router.route('/:user/my-courses').get( async (req, res) => {
     const subject = req.query.subject;
     const user = req.params.user;
     const regExp = new RegExp(searchString,'i');  //case-insensitive regular expression
-    var docs; var newDocs; var filteredDocs;
     const minPrice = req.query.minPrice ? parseInt(req.query.minPrice) : undefined;
     const maxPrice = req.query.maxPrice ? parseInt(req.query.maxPrice) : undefined;
+    const subject = req.query.subject;
+    var docs; var newDocs; var filteredDocs;
+
     if (searchString){
-       docs = await Course.find({instructorUsername: user})
+        docs = await Course.find({instructorUsername: user})
         .or([{title: {$regex: regExp}},{subject:{$regex: regExp}}]).limit(10)
-        .select(projection).catch(err => res.status(500).json('Error: ' + err));} 
+        .select(projection)
+        .catch(err => res.status(500).json('Error: ' + err));} 
     else {
-      docs= await  Course.find({instructorUsername: user}).limit(10)
+        docs = await Course.find({instructorUsername: user}).limit(10)
         .select(projection)
         .catch(err => res.status(500).json('Error: ' + err));
     }
+
     if (subject) newDocs = docs.filter(course => course.subject === subject); //filtering
     else newDocs = docs;
 
