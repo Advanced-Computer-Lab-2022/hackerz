@@ -1,6 +1,7 @@
 const router = require('express').Router();
 let Course = require('../models/course.model');
-const projection = {_id:0, __v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
+
+const projection = {__v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
 
 // router.route('/').get((req, res) => {
 //   Course.find()
@@ -43,19 +44,18 @@ router.route('/:user/my-courses').get( async (req, res) => {
 router.route('/:user/add-course').post((req, res) => {
   const title = req.body.title;
   const description = req.body.description;
-  const duration = Number(req.body.duration);
-//   const dateAdded = Date.parse(req.body.date)
-  const dateAdded = Date.now();
   const instructorUsername = req.params.user;
   const subject = req.body.subject;
+  const price = req.body.price;
+  const subtitles = req.body.subtitles;
 
   const newCourse = new Course({
-    title,
+    title,rating: 0,
     description,
-    duration,
-    dateAdded,
     instructorUsername,
-    subject
+    subject,
+    price,
+    subtitles
   });
 
   newCourse.save()

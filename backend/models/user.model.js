@@ -20,8 +20,9 @@ const userSchema = new Schema({
     required: true,
     unique: false,
     trim: true,
-    minlength: 8
+    minlength: 4
   },
+  country: {type:String}
 }, {
   timestamps: true,
 });

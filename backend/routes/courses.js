@@ -1,6 +1,7 @@
 const router = require('express').Router();
 let Course = require('../models/course.model');
-const projection = {_id:0, __v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
+let countries = require('../../src/countries.json');
+const projection = {__v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
 
 router.route('/').get( async (req, res) => {
     const searchString = req.query.query;
@@ -27,6 +28,11 @@ router.route('/').get( async (req, res) => {
         docs = await Course.find().limit(10)
         .select(projection)
         .catch(err => res.status(500).json('Error: ' + err));
+    }
+
+    var country = req.query.country;
+    for(var doc in docs){
+        docs[doc].price = (docs[doc].price/countries[country].ratio).toFixed(2);
     }
     
     if (subject && rating) newDocs = docs.filter(course => course.subject === subject && course.rating === rating); //filtering
