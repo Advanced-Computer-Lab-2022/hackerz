@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let Course = require('../models/course.model');
+let User = require('../models/user.model');
 
 const projection = {__v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
 
@@ -8,9 +9,17 @@ const projection = {__v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
 //     .then(courses => res.json(courses))
 //     .catch(err => res.status(500).json('Error: ' + err));
 // });
+/*router.route('/').post(async (req,res)=>{
+   const username = req.body.username;
+   const password = req.body.password;
+   const userdata = User.find( { username: { $in: username } }, { password: { $in:password} } );
+   
+    res.json(userdata);
+   
+
+});*/
 router.route('/:user/my-courses').get( async (req, res) => {
     const searchString = req.query.query;
-    const subject = req.query.subject;
     const user = req.params.user;
     const regExp = new RegExp(searchString,'i');  //case-insensitive regular expression
     const minPrice = req.query.minPrice ? parseInt(req.query.minPrice) : undefined;
@@ -39,7 +48,6 @@ router.route('/:user/my-courses').get( async (req, res) => {
     res.json(filteredDocs);
 
  });
- 
 
 router.route('/:user/add-course').post((req, res) => {
   const title = req.body.title;
@@ -61,6 +69,20 @@ router.route('/:user/add-course').post((req, res) => {
   newCourse.save()
   .then(() => res.json('Course added!'))
   .catch(err => res.status(500).json('Error: ' + err));
+});
+router.route('/:username/editbiography').post( async (req, res) => {
+  var userbiography = req.body.userbiography;
+  var doc = await User.findOneAndUpdate({username}, {userbiography:userbiography}, {
+     new: true
+   });
+   res.json("biography successfully updated");
+});
+router.route('/:username/editusermail').post( async (req, res) => {
+ var useremail = req.body.useremail;
+ var doc = await User.findOneAndUpdate({username}, {useremail:useremail}, {
+    new: true
+  });
+  res.json("biography successfully updated");
 });
 
 // router.route('/:id').get((req, res) => {

@@ -22,8 +22,23 @@ const userSchema = new Schema({
     trim: true,
     minlength: 4
   },
-  country: {type:String}
-}, {
+  country: {type:String},
+  userbiography:{
+    type: String,
+    required: false,
+    unique: false,
+    trim: true,
+    minlength: 11
+  },
+  useremail:{
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    minlength: 11
+  }
+},
+ {
   timestamps: true,
 });
 

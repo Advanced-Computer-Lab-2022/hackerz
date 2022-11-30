@@ -1,0 +1,19 @@
+const router = require('express').Router();
+let User = require('../models/user.model');
+router.route('/:username/biography').post( async (req, res) => {
+     var userbiography = req.body.userbiography;
+     var doc = await User.findOneAndUpdate({username}, {userbiography:userbiography}, {
+        new: true
+      });
+      res.json("biography successfully updated");
+});
+router.route('/:username/usermail').post( async (req, res) => {
+    var useremail = req.body.useremail;
+    var doc = await User.findOneAndUpdate({username}, {useremail:useremail}, {
+       new: true
+     });
+     res.json("biography successfully updated");
+});
+
+
+module.exports = router;

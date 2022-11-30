@@ -5,13 +5,6 @@ const projection = {__v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
 
 router.route('/').get( async (req, res) => {
     const searchString = req.query.query;
-
-    const regexp_subject =new RegExp(subject,'i'); 
-
-  
-    
-
-
     const regExp = new RegExp(searchString,'i');  //case-insensitive regular expression
     const minPrice = req.query.minPrice ? parseInt(req.query.minPrice) : undefined;
     const maxPrice = req.query.maxPrice ? parseInt(req.query.maxPrice) : undefined;
@@ -48,12 +41,10 @@ router.route('/').get( async (req, res) => {
     res.json(filteredDocs);
 });
 
-
 router.route('/:id').get((req, res) => {
     Course.findById(req.params.id).select(projection)
       .then(course => res.json(course))
       .catch(err => res.status(500).json('Error: ' + err));
   });
-
 
 module.exports = router;
