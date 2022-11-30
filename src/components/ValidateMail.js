@@ -2,6 +2,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import { useParams } from 'react-router-dom';
 import CoursesList from './CoursesList';
 import Enter_password from './Enter_password';
+import ConfirmPassword from './ConfirmPassword';
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
 function ValidateMail(){
@@ -28,7 +29,7 @@ if (ValidateResponse== "Verified"){
         flag ? (
           <div>
             <h1>  Verified</h1>
-            < Enter_password id = {userid} token={token} />
+            < ConfirmPassword id = {userid} token={token} />
           </div>
         ) : (
           <div>
