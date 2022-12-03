@@ -15,7 +15,7 @@ export default function Course(props) {
         <Card.Subtitle className="mb-2 text-muted">by {course.instructorUsername} (Rating: {course.rating? course.rating : 0}/5)</Card.Subtitle>
         <Card.Text>{course.description}</Card.Text>
         <NavLink to={link}>View Course</NavLink>
-        {!corp.corp ?
+        {!corp.corp ?  
          <Card.Footer className="text-muted">{
             course.price ? (course.price === 0 ?
               <span style={{color: "red"}}>FREE</span> 
