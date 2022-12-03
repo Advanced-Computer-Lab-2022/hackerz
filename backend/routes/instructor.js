@@ -60,6 +60,7 @@ router.route('/watchLink/:coursetitle/:subtitle').get(async(req, res) => {
     res.json(docs[objIndex].link);
     //watch link frontend
 });
+
 // router.route('/:id').delete((req, res) => {
 //   Course.findByIdAndDelete(req.params.id)
 //     .then(() => res.json('Course deleted.'))
