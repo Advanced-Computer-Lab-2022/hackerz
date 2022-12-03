@@ -72,6 +72,7 @@ router.route('/:user/add-course').post((req, res) => {
 });
 router.route('/:username/editbiography').post( async (req, res) => {
   var userbiography = req.body.userbiography;
+  var username = req.params.username;
   var doc = await User.findOneAndUpdate({username}, {userbiography:userbiography}, {
      new: true
    });
@@ -79,10 +80,11 @@ router.route('/:username/editbiography').post( async (req, res) => {
 });
 router.route('/:username/editusermail').post( async (req, res) => {
  var useremail = req.body.useremail;
+ var username = req.params.username;
  var doc = await User.findOneAndUpdate({username}, {useremail:useremail}, {
     new: true
   });
-  res.json("biography successfully updated");
+  res.json("email successfully updated");
 });
 
 // router.route('/:id').get((req, res) => {

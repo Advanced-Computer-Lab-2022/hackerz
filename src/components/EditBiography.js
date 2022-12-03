@@ -6,8 +6,8 @@ function EditBiography({user}) {
     const username = user.username;
     const bioRef = useRef();
     const changeBiography= async () => {
-    const response = await axios.get(APIURL + '/instructor/'+ username + '/editbiography', {  userbiography:bioRef })
-    alert(response);
+    const response = await axios.post(APIURL + '/instructor/'+ username + '/editbiography', {  userbiography:bioRef.current.value })
+    alert(response.data);
     }
     return(
         <div className="m-3">

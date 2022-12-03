@@ -22,7 +22,7 @@ router.route('/addadmin').post(async( req,res) => {// addadmin?
 router.route('/addinst').post((req, res) => {
   const username = req.body.username;// takes username from the body
   const password = req.body.password;
-  const newUser = new User({username,userType:'instructor', password, country:"Egypt"});// creates a new user
+  const newUser = new User({username,userType:'instructor', useremail:"beedoz@gmail.com",userbiography:"" ,password, country:"Egypt"});// creates a new user
 
   newUser.save() 
     .then(() => res.json('User added!'))

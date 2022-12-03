@@ -6,7 +6,11 @@ import CorpCourses from './components/CorpCourses';
 import CourseView from './components/CourseView';
 import AddCourse from './components/AddCourse';
 import AdminPanel from './components/AdminPanel';
+import EditMail from './components/EditMail';
+import EditBiography from './components/EditBiography'
 import Container from 'react-bootstrap/Container';
+import ValidateMail from './components/ValidateMail';
+import ResetPassword from './components/ResetPassword';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -14,7 +18,6 @@ import CountriesList from './components/CountriesList';
 import countries from './countries.json';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
-import ValidateMail from './components/ValidateMail';
 
 
 function App() {
@@ -65,11 +68,11 @@ function App() {
           <Route path='/corp' element={<CorpCourses/>}/>
           <Route path='/instructor/my-courses' element={<InstructorCourses user={user}/>}/>
           <Route path='/instructor/add-course' element={<AddCourse user={user}/>}/>
-          <Route path='/instructor/editbiography' element={< EditBiography user={user}/>}/>
-          <Route path='/instructor/editusermail' element={< EditMail user={user}/>}/>
+          <Route path='/instructor/editbiography' element={<EditBiography user={user}/>}/>
+          <Route path='/instructor/editusermail' element={<EditMail user={user}/>}/>
           <Route path='/admin' element={<AdminPanel/>}/>
-          <Route path='/editInfo' element={<Reset_password/>}/>
-          <Route path='/editInfo/reset-password/:id/:token' element={<ValidateMail/>}/>
+          <Route path='/editInfo' element={<ResetPassword/>}/>
+          <Route path='/reset-password/:userid/:token' element={<ValidateMail/>}/>
       
 
         </Routes>

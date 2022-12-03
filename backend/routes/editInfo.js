@@ -15,17 +15,18 @@ router.route('/').post(async (req,res)=>{
             console.log(err);
         }else{
             if (doc){
-               const userid= await User.find({useremail:useremail})
+               const user = await User.findOne({useremail:useremail})
                 .select(projection)
                 .catch(err => res.status(500).json('Error: ' + err));
-                   const secret = JWT_SECRET + userid;                    
+                  const secret = JWT_SECRET + user._id;  
+                                  
                   const payload = {
-                    
-                    id: userid
-
+                    id: user._id
                   }
+                  
+
                 const token = jwt.sign(payload,secret,{expiresIn:'15m'});
-                const link=`http://localhost:3000/reset-passwrod/${userid}${token} `;
+                const link=`http://localhost:3000/reset-password/${user._id}/${token} `;
                 
                 //res.status(200).send({ auth: true, token: token });
                 const transporter = nodemailer.createTransport({
@@ -67,20 +68,19 @@ router.route('/').post(async (req,res)=>{
   const token= req.params.token;
   User.exists({_id:user_id}, async function (err, doc) {
     if (err){
-        console.log(err);
+      console.log(err);
     }else{
-        if (doc){
-          const secret = JWT_SECRET + user_id; 
-           try{
-              const payload= jwt.verify(token,secret);
-              res.json("Verified")
+      if (doc){
+        const secret = JWT_SECRET + user_id; 
+        try{
+         // console.log(secret)
+          const payload= jwt.verify(token,secret);
+          
+          res.json("Verified")
            }
            catch(error){
-            res.send(error.message);
-                
+            res.json(error.message);    
            }
-                                  
-              
               }}
 
  });
@@ -89,7 +89,7 @@ router.route('/reset-password/:id/:token').post(async(req,res)=>{
   const new_password = req.body.new_password;
   const user_id= req.params.id;
   const confirm_new_password= req.body.confirm_new_password;
-  if (new_password != confirm_new_password){
+  if (new_password !== confirm_new_password){
     res.json("PASSWORDS NOT MATCHED");
 
   }
