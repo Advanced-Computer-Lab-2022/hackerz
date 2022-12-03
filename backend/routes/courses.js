@@ -68,13 +68,12 @@ router.route('/:course/get-exercises').get( async (req, res) => {
 
 router.route('/:course/add-exercise').post( async (req, res) => {
     const title = req.body.title;
+    const questions = req.body.questions;
     const course = req.params.course;
 
     const currentCourse = await Course.findOne({_id: course});
 
-    const newExercise = new Exercise({
-        title, questions: []
-    });
+    const newExercise = new Exercise({ title, questions });
     console.log(currentCourse.exercises);
     currentCourse.exercises.push(newExercise._id);
     await currentCourse.save();
