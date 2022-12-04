@@ -24,11 +24,25 @@ const userSchema = new Schema({
   },
   rating: { type: Number },
   country: {type:String},
+  userbiography:{
+    type: String,
+    required: false,
+    unique: false,
+    trim: true
+  },
+  useremail:{
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    minlength: 11
+  },
   enrolledCourses: [{type:String}],
   exercises: [{ 
     exerciseID: { type: String } , score: { type: Number }, maxScore: { type: Number }
     }]
-}, {
+},
+ {
   timestamps: true,
 });
 

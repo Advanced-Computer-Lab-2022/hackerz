@@ -9,7 +9,11 @@ import AdminPanel from './components/AdminPanel';
 import ExerciseList from './components/ExerciseList';
 import ExerciseView from './components/ExerciseView';
 import AddExercise from './components/AddExercise';
+import EditMail from './components/EditMail';
+import EditBiography from './components/EditBiography'
 import Container from 'react-bootstrap/Container';
+import ValidateMail from './components/ValidateMail';
+import ResetPassword from './components/ResetPassword';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -43,10 +47,14 @@ function App() {
             <NavLink className="mx-2 vertical-center" to="/search">Search</NavLink>&nbsp;&nbsp;
             <NavLink className="mx-2 vertical-center" to="/admin">Admin</NavLink>&nbsp;&nbsp;
             <NavLink className="mx-2 vertical-center" to="/corp">Corporate</NavLink>&nbsp;&nbsp;
+            <NavLink className="mx-2 vertical-center" to="/editInfo">Reset password</NavLink>&nbsp;&nbsp;
             <NavDropdown title="Instructor" id="basic-nav-dropdown">
               <NavLink to="/instructor/my-courses">View My Courses</NavLink><br/>
               <NavLink to="/instructor/add-course">Add New Course</NavLink>
+              <NavLink to="/instructor/editbiography">Edit Biography</NavLink>
+              <NavLink to="/instructor/editusermail">Edit Mail</NavLink>
             </NavDropdown>
+        
           </Nav>
           <input className="m-2" ref={usernameRef} placeholder="Username" type="search"/>
           <button className="m-2" onClick={login}>Login</button>
@@ -67,11 +75,16 @@ function App() {
           <Route path='/corp' element={<CorpCourses/>}/>
           <Route path='/instructor/my-courses' element={<InstructorCourses user={user}/>}/>
           <Route path='/instructor/add-course' element={<AddCourse user={user}/>}/>
+          <Route path='/instructor/editbiography' element={<EditBiography user={user}/>}/>
+          <Route path='/instructor/editusermail' element={<EditMail user={user}/>}/>
           <Route path='/admin' element={<AdminPanel/>}/>
           <Route path='/exercise/:id' element={<ExerciseView user={user}/>}/>
           <Route path='/course/:id/exercises' element={<ExerciseList user={user}/>}/>
           <Route path='/course/:id/add-exercise' element={<AddExercise/>}/>
-          
+                    <Route path='/editInfo' element={<ResetPassword/>}/>
+          <Route path='/reset-password/:userid/:token' element={<ValidateMail/>}/>
+      
+
         </Routes>
       </BrowserRouter>
     </div>

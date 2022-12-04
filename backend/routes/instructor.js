@@ -80,18 +80,21 @@ router.route('/:user/add-course').post((req, res) => {
     .then(() => res.json('Course added!'))
     .catch(err => res.status(500).json('Error: ' + err));
 });
-
-// router.route('/:id').get((req, res) => {
-//   Course.findById(req.params.id)
-//     .then(course => res.json(course))
-//     .catch(err => res.status(500).json('Error: ' + err));
-// });
-
-// router.route('/:id').delete((req, res) => {
-//   Course.findByIdAndDelete(req.params.id)
-//     .then(() => res.json('Course deleted.'))
-//     .catch(err => res.status(500).json('Error: ' + err));
-// });
-
+router.route('/:username/editbiography').post( async (req, res) => {
+  var userbiography = req.body.userbiography;
+  var username = req.params.username;
+  var doc = await Instructor.findOneAndUpdate({username}, {userbiography:userbiography}, {
+     new: true
+   });
+   res.json("biography successfully updated");
+});
+router.route('/:username/editusermail').post( async (req, res) => {
+ var useremail = req.body.useremail;
+ var username = req.params.username;
+ var doc = await Instructor.findOneAndUpdate({username}, {useremail:useremail}, {
+    new: true
+  });
+  res.json("email successfully updated");
+});
 
 module.exports = router;
