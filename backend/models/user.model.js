@@ -23,7 +23,11 @@ const userSchema = new Schema({
     minlength: 4
   },
   rating: { type: Number },
-  country: { type:String }
+  country: {type:String},
+  enrolledCourses: [{type:String}],
+  exercises: [{ 
+    exerciseID: { type: String } , score: { type: Number }, maxScore: { type: Number }
+    }]
 }, {
   timestamps: true,
 });

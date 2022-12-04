@@ -72,7 +72,8 @@ router.route('/:user/add-course').post((req, res) => {
     instructorUsername,
     subject,
     price,
-    subtitles
+    subtitles,
+    exercises: []
   });
 
   newCourse.save()

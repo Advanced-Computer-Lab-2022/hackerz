@@ -6,11 +6,15 @@ import CorpCourses from './components/CorpCourses';
 import CourseView from './components/CourseView';
 import AddCourse from './components/AddCourse';
 import AdminPanel from './components/AdminPanel';
+import ExerciseList from './components/ExerciseList';
+import ExerciseView from './components/ExerciseView';
+import AddExercise from './components/AddExercise';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import CountriesList from './components/CountriesList';
+import Home from './components/Home';
 import countries from './countries.json';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
@@ -56,14 +60,18 @@ function App() {
     
         <Routes>
           <Route path='/'/>
+          <Route path='/' element={<Home/>}/>
           <Route path='/instructor' element={<InstructorsList/>}/>
           <Route path='/search' element={<Search/>}/>
-          <Route path='/course/:id' element={<CourseView/>}/>
+          <Route path='/course/:id' element={<CourseView user={user}/>}/>
           <Route path='/corp' element={<CorpCourses/>}/>
           <Route path='/instructor/my-courses' element={<InstructorCourses user={user}/>}/>
           <Route path='/instructor/add-course' element={<AddCourse user={user}/>}/>
           <Route path='/admin' element={<AdminPanel/>}/>
-
+          <Route path='/exercise/:id' element={<ExerciseView user={user}/>}/>
+          <Route path='/course/:id/exercises' element={<ExerciseList user={user}/>}/>
+          <Route path='/course/:id/add-exercise' element={<AddExercise/>}/>
+          
         </Routes>
       </BrowserRouter>
     </div>
