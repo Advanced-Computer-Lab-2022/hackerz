@@ -2,7 +2,7 @@ const router = require('express').Router();
 let Course = require('../models/course.model');
 let countries = require('../../src/countries.json');
 const Exercise = require('../models/exercise.model');
-const User = require('../models/user.model');
+//const User = require('../models/user.model');
 const projection = {__v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
 
 router.route('/').get(async (req, res) => {
