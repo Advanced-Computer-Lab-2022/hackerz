@@ -14,6 +14,7 @@ import CountriesList from './components/CountriesList';
 import countries from './countries.json';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
+import InstructorsList from './components/InstructorsList';
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />  
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto mx-3">
-            <NavLink className="mx-2 vertical-center" to="/">Home</NavLink>&nbsp;&nbsp;
+            <NavLink className="mx-2 vertical-center" to="/instructor">Instructors</NavLink>&nbsp;&nbsp;
             <NavLink className="mx-2 vertical-center" to="/search">Search</NavLink>&nbsp;&nbsp;
             <NavLink className="mx-2 vertical-center" to="/admin">Admin</NavLink>&nbsp;&nbsp;
             <NavLink className="mx-2 vertical-center" to="/corp">Corporate</NavLink>&nbsp;&nbsp;
@@ -55,6 +56,7 @@ function App() {
     
         <Routes>
           <Route path='/'/>
+          <Route path='/instructor' element={<InstructorsList/>}/>
           <Route path='/search' element={<Search/>}/>
           <Route path='/course/:id' element={<CourseView/>}/>
           <Route path='/corp' element={<CorpCourses/>}/>

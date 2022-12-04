@@ -11,7 +11,7 @@ router.route('/addadmin').post(async( req,res) => {// addadmin?
   var count = await User.countDocuments({userType: "admin"});
   var username = "admin"+count++;// takes username from the body
   const password = "admin123";
-  const newUser = new User({username,userType:'admin',password, country:"Egypt"});// creates a new user
+  const newUser = new User({username,userType:'admin',password, rating: undefined, country:"Egypt"});// creates a new user
 
   newUser.save() 
     .then(() => res.json(newUser))
@@ -22,7 +22,7 @@ router.route('/addadmin').post(async( req,res) => {// addadmin?
 router.route('/addinst').post((req, res) => {
   const username = req.body.username;// takes username from the body
   const password = req.body.password;
-  const newUser = new User({username,userType:'instructor', password, country:"Egypt"});// creates a new user
+  const newUser = new User({username, userType: 'instructor', password, rating: 0, country: "Egypt"});// creates a new user
 
   newUser.save() 
     .then(() => res.json('User added!'))
@@ -33,7 +33,7 @@ router.route('/addinst').post((req, res) => {
 router.route('/addcorp').post((req, res) => {
   const username = req.body.username;// takes username from the body
   const password = req.body.password;
-  const newUser = new User({username,userType:'corpTrainee', password, country:"Egypt"});// creates a new user
+  const newUser = new User({username,userType:'corpTrainee', password, rating: undefined, country:"Egypt"});// creates a new user
 
   newUser.save() 
     .then(() => res.json('User added!'))

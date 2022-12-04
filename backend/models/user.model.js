@@ -22,7 +22,8 @@ const userSchema = new Schema({
     trim: true,
     minlength: 4
   },
-  country: {type:String}
+  rating: { type: Number },
+  country: { type:String }
 }, {
   timestamps: true,
 });
