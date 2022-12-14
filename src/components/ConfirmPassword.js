@@ -20,8 +20,8 @@ function ConfirmPassword(props){
          return(
             <div className="m-3">
             <input className="m-1" ref={Passref} placeholder="New Password" type="text"/>
-            <button onClick={changePassword}>Search</button> 
             <input className="m-4" ref={ConfirmPassref} placeholder="Confirm Password" type="text"/><br/>
+            <button onClick={changePassword}>Change Password</button> 
             </div>
          );
        }
