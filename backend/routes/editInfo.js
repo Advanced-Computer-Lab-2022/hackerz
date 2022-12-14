@@ -101,17 +101,30 @@ router.route('/reset-password/:id/:token').post(async(req,res)=>{
   }
 
 });
-router.route('/forget-password').get (async (req,res) =>{
+router.route('/forget-password').post (async (req,res) =>{
   var useremail = req.query.useremail;
   var password = req.query.password;
+  var newpassword= req.query.newpassword;
+  var ConfirmNewPassword = req.query.ConfirmNewPassword;
   
   User.exists({useremail:useremail , password:password}, async function (err, doc) {
     if (err){
       console.log(err);
     }
-    if (doc){
-        res.json("User info found , please enter your new password");
+    if (doc){ 
+      if(password===newpassword){
+      var doc = await User.findOneAndUpdate({useremail:useremail}, {password:newpassword}, {
+        new: true
+      });
+      res.json("Password updated successfully");}
+      else{
+        res.json("Passwordsdo not match ");
+      }
+    }
+    else{
+      res.json("Invalid credetinals ");
     }
 })
 });
+
  module.exports = router;
