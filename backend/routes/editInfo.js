@@ -101,4 +101,17 @@ router.route('/reset-password/:id/:token').post(async(req,res)=>{
   }
 
 });
+router.route('/forget-password').get (async (req,res) =>{
+  var useremail = req.query.useremail;
+  var password = req.query.password;
+  
+  User.exists({useremail:useremail , password:password}, async function (err, doc) {
+    if (err){
+      console.log(err);
+    }
+    if (doc){
+        res.json("User info found , please enter your new password");
+    }
+})
+});
  module.exports = router;
