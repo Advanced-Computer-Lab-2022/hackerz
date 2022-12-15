@@ -27,7 +27,10 @@ const userSchema = new Schema({
   enrolledCourses: [{type:String}],
   exercises: [{ 
     exerciseID: { type: String } , score: { type: Number }, maxScore: { type: Number }
-    }]
+    }],
+  reviews: [{
+    reviewID: { type: String }
+  }]
 }, {
   timestamps: true,
 });

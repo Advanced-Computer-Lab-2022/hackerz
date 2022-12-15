@@ -10,7 +10,8 @@ const courseSchema = new Schema({
   subject: { type: String, required: true },
   price: { type: Number, required: true },
   subtitles : [{ title: { type: String }, description :{ type: String }, duration: { type: Number }}],
-  exercises: [{ id: { type: String }}]
+  exercises: [{ id: { type: String }}],
+  reviews: [{ reviewID: { type: String }}]
 }, {
   timestamps: true,
 });
