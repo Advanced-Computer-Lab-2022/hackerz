@@ -1,41 +1,53 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import CoursesList from './CoursesList';
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
 
-function InstructorCourses({user}) {
+function InstructorCourses({ user }) {
   const [courses, setCourses] = useState([]);
-  const corp = {corp:true}
+  const [rating, setRating] = useState(0);
+  const corp = { corp: true }
   const searchRef = useRef();
   const subjectRef = useRef();
   const username = user.username;
+
+  const getRating = async () => {
+    var instructor = await axios.get(APIURL + '/instructor/' + username)
+    const tmp_rating = instructor.data.rating ? instructor.data.rating : 0;
+    setRating(tmp_rating)
+  }
+
   const searchCourses = async () => {
     const query = searchRef.current.value;
     const subject = subjectRef.current.value;
     const params = { query, subject }
-    const response = await axios.get(APIURL + '/instructor/'+ username + '/my-courses', { params })
+    const response = await axios.get(APIURL + '/instructor/' + username + '/my-courses', { params })
     const data = response.data;
     console.log(data); //testing purposes
     console.log(user)
     setCourses(data);
   }
- 
+
   useEffect(() => {
-    searchCourses();  // eslint-disable-next-line
-  },[])
+    searchCourses(); 
+    getRating();
+  }, [])
 
   return (
     <div className="m-3">
-        <input className="m-1" ref={searchRef} placeholder="Search" type="search"/>
-        <button onClick={searchCourses}>Search</button> 
-        <input className="m-4" ref={subjectRef} placeholder="Subject" type="text"/><br/>
-        
+      <div>
+        Rating: {rating}/5
+      </div>
+      <input className="m-1" ref={searchRef} placeholder="Search" type="search" />
+      <button onClick={searchCourses}>Search</button>
+      <input className="m-4" ref={subjectRef} placeholder="Subject" type="text" /><br />
+
       <h2>Search Results:</h2>
       <hr></hr>
       {
         courses?.length > 0 ? (
           <div>
-            <CoursesList courses = {courses} corp = {corp}/>
+            <CoursesList courses={courses} corp={corp} />
           </div>
         ) : (
           <div>

@@ -9,7 +9,8 @@ const courseSchema = new Schema({
   instructorUsername: {type: String, required: true },
   subject: { type: String, required: true },
   price: { type: Number, required: true },
-  subtitles : [{title: {type: String }, description :{type: String }, duration: {type: Number}}]
+  subtitles : [{ title: { type: String }, description :{ type: String }, duration: { type: Number }}],
+  exercises: [{ id: { type: String }}]
 }, {
   timestamps: true,
 });

@@ -6,6 +6,9 @@ import CorpCourses from './components/CorpCourses';
 import CourseView from './components/CourseView';
 import AddCourse from './components/AddCourse';
 import AdminPanel from './components/AdminPanel';
+import ExerciseList from './components/ExerciseList';
+import ExerciseView from './components/ExerciseView';
+import AddExercise from './components/AddExercise';
 import EditMail from './components/EditMail';
 import EditBiography from './components/EditBiography'
 import Container from 'react-bootstrap/Container';
@@ -15,9 +18,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import CountriesList from './components/CountriesList';
+import Home from './components/Home';
 import countries from './countries.json';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
+import InstructorsList from './components/InstructorsList';
 
 
 function App() {
@@ -38,7 +43,7 @@ function App() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />  
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto mx-3">
-            <NavLink className="mx-2 vertical-center" to="/">Home</NavLink>&nbsp;&nbsp;
+            <NavLink className="mx-2 vertical-center" to="/instructor">Instructors</NavLink>&nbsp;&nbsp;
             <NavLink className="mx-2 vertical-center" to="/search">Search</NavLink>&nbsp;&nbsp;
             <NavLink className="mx-2 vertical-center" to="/admin">Admin</NavLink>&nbsp;&nbsp;
             <NavLink className="mx-2 vertical-center" to="/corp">Corporate</NavLink>&nbsp;&nbsp;
@@ -63,15 +68,20 @@ function App() {
     
         <Routes>
           <Route path='/'/>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/instructor' element={<InstructorsList/>}/>
           <Route path='/search' element={<Search/>}/>
-          <Route path='/course/:id' element={<CourseView/>}/>
+          <Route path='/course/:id' element={<CourseView user={user}/>}/>
           <Route path='/corp' element={<CorpCourses/>}/>
           <Route path='/instructor/my-courses' element={<InstructorCourses user={user}/>}/>
           <Route path='/instructor/add-course' element={<AddCourse user={user}/>}/>
           <Route path='/instructor/editbiography' element={<EditBiography user={user}/>}/>
           <Route path='/instructor/editusermail' element={<EditMail user={user}/>}/>
           <Route path='/admin' element={<AdminPanel/>}/>
-          <Route path='/editInfo' element={<ResetPassword/>}/>
+          <Route path='/exercise/:id' element={<ExerciseView user={user}/>}/>
+          <Route path='/course/:id/exercises' element={<ExerciseList user={user}/>}/>
+          <Route path='/course/:id/add-exercise' element={<AddExercise/>}/>
+                    <Route path='/editInfo' element={<ResetPassword/>}/>
           <Route path='/reset-password/:userid/:token' element={<ValidateMail/>}/>
       
 

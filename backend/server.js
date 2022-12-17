@@ -21,6 +21,8 @@ const adminRouter = require('./routes/admin');
 const instructorRouter = require('./routes/instructor');
 const coursesRouter = require('./routes/courses');
 const corpRouter = require('./routes/corp');
+const exerciseRouter = require('./routes/exercise');
+const traineeRouter = require('./routes/trainee');
 const editInfoRouter = require('./routes/editInfo');
 //const editPersonalRouter = require('./routes/editPersonal');
 
@@ -28,6 +30,8 @@ app.use('/admin', adminRouter);
 app.use('/instructor', instructorRouter);
 app.use('/courses', coursesRouter);
 app.use('/corp', corpRouter);
+app.use('/exercise', exerciseRouter);
+app.use('/trainee', traineeRouter);
 app.use('/editInfo', editInfoRouter);
 //app.use('/editPersonal', editPersonalRouter);
 
