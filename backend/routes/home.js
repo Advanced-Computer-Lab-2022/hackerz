@@ -74,7 +74,7 @@ router.route('/').post( async (req, res) => {
         process.env.REFRESH_TOKEN_SECRET,
         { expiresIn:"7d"}
     )
-    res.cookie("jwt",refreshtoken,{httpOnly:true,maxAge:maxAge*1000})
+    res.cookie("jwt",refreshtoken,{httpOnly:false,maxAge:maxAge*100,sameSite:'strict'})
     if (user.firstlog==true){
      // var doc2 = await User.findOneAndUpdate({useremail:useremail}, {firstlog:false}, {
        // new: true

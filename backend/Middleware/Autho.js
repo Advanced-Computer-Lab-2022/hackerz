@@ -63,7 +63,7 @@ const requireAuthinstructor = (req, res, next) => {
         if (err) {
           // console.log('You are not logged in.');
           // res send status 401 you are not logged in
-          res.status(401).json({message:"You are not logged in."})
+          res.status(401).json({message:"error."})
           // res.redirect('/login');
         } else {
           if(userinfo.usertype != 'individualTrainee'){
@@ -77,7 +77,7 @@ const requireAuthinstructor = (req, res, next) => {
         }
       });
     } else {
-      res.status(401).json({message:"You are not logged in."})
+      res.status(401).json({message:"You are not logged in, no token"})
     }
   };
 
@@ -90,7 +90,7 @@ const requireAuthinstructor = (req, res, next) => {
         if (err) {
           // console.log('You are not logged in.');
           // res send status 401 you are not logged in
-          res.status(401).json({message:"You are not logged in."})
+          res.status(401).json({message:"error."})
           // res.redirect('/login');
         } else {
           if(userinfo.usertype != 'corpTrainee'){
@@ -104,7 +104,7 @@ const requireAuthinstructor = (req, res, next) => {
         }
       });
     } else {
-      res.status(401).json({message:"You are not logged in."})
+      res.status(401).json({message:"You are not logged in,no token"})
     }
   };
 

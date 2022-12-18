@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
-
+axios.defaults.withCredentials = true;
 export default function ExerciseView({user}) {
     let {id} = useParams();
     const [currentQuestion, setCurrentQuestion] = useState(0);

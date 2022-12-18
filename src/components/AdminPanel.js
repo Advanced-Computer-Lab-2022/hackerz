@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
-
+axios.defaults.withCredentials = true;
 export default function AdminPanel() {
     const instructorUsernameRef = useRef();
     const instructorPasswordRef = useRef();
@@ -19,7 +19,7 @@ export default function AdminPanel() {
         const password = instructorPasswordRef.current.value;
         const data = {username, password}
         const link = APIURL + '/admin/addinst';
-        await axios.post(link, data);
+        await axios.post(link, data,{  withCredentials: true,credentials: "include"});
         instructorUsernameRef.current.value = "";
         instructorPasswordRef.current.value = "";
         alert("Instructor Added")
@@ -29,14 +29,14 @@ export default function AdminPanel() {
         const password = corpPasswordRef.current.value;
         const data = {username, password}
         const link = APIURL + '/admin/addcorp';
-        await axios.post(link, data);
+        await axios.post(link, data,{  withCredentials: true,credentials: "include"});
         corpUsernameRef.current.value = "";
         corpPasswordRef.current.value = "";
         alert("Corporate Trainee Added")
     }
 
     const addAdmin = async () => {
-        const response = await axios.post(APIURL + '/admin/addadmin'); 
+        const response = await axios.post(APIURL + '/admin/addadmin',{  withCredentials: true,credentials: "include"}); 
         const username = response.data.username;
         const password = response.data.password;
         alert("New Admin added with username: " + username + " and password: " + password)}

@@ -3,7 +3,7 @@ import CoursesList from './CoursesList';
 import { my_country } from './Country';
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
-
+axios.defaults.withCredentials = true;
 function Search() {
   const [courses, setCourses] = useState([]);
   const searchRef = useRef();

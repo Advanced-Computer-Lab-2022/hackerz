@@ -3,7 +3,7 @@ import React, {useEffect, useState, useRef} from 'react';
 //import ReactDOM from 'react-dom/client';
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
 function Login(){
      const useremailref = useRef();
     const userpassref = useRef();
@@ -20,7 +20,7 @@ const handleSubmit = async (event) => {
    
 
     const params = { useremail, userpassword }
-    const response = await axios.get(APIURL + '/home', { params },{  withCredentials: true})
+    const response = await axios.get(APIURL + '/home', { params },{  withCredentials: true,credentials: "include"})
     alert(response.data);
   }
 

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect } from 'react';
 import ReactStars from 'react-rating-stars-component';
-
+axios.defaults.withCredentials = true;
 const APIURL = 'http://localhost:5000';
 
 export default function Instructor(props) {

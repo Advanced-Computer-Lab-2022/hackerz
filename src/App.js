@@ -25,7 +25,7 @@ import countries from './countries.json';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import InstructorsList from './components/InstructorsList';
-import Register from './components/Register';
+//import Register from './components/Register';
 
 
 function App() {
