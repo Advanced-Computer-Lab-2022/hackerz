@@ -3,7 +3,7 @@ let User = require('../models/user.model');
 const jwt = require ('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
-app.use(cookieParser());
+
 const JWT_SECRET='Secret';
 const projection = {password:1};
 router.route('/register').post( async (req, res) => {

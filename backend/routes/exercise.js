@@ -1,8 +1,8 @@
 const router = require('express').Router();
 let Exercise = require('../models/exercise.model');
 const cookieParser = require('cookie-parser');
-app.use(cookieParser());
-const requireAuthinstructor = require('../Middleware/Autho');
+//app.use(cookieParser());
+const { requireAuthadmin ,requireAuthinstructor, requireAuthindividualTrainee , requireAuthcorpTrainee } = require('../Middleware/Autho');
 router.use(
   requireAuthinstructor
   );
