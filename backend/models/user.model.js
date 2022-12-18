@@ -14,14 +14,15 @@ const userSchema = new Schema({
     type: String,
     // required: true,
     enum : ['admin','instructor','individualTrainee','corpTrainee','guest']
-},
+  },
   password: {
     type: String,
     required: true,
     unique: false,
     trim: true,
-    minlength: 8
+    minlength: 4
   },
+  country: {type:String}
 }, {
   timestamps: true,
 });

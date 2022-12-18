@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const courseSchema = new Schema({
   title: { type: String, required: true },
+  rating: { type: Number },
   description: { type: String, required: true },
   duration: { type: Number, required: true },
   dateAdded: { type: Date, required: true },
@@ -12,6 +13,8 @@ const courseSchema = new Schema({
 }, {
   timestamps: true,
 });
+
+courseSchema.index({name: 'text', instructorUsername: 'text', subject: 'text'});
 
 const Course = mongoose.model('Course', courseSchema);
 
