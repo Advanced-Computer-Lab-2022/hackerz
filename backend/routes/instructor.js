@@ -1,6 +1,12 @@
 const router = require('express').Router();
 let Course = require('../models/course.model');
 let Instructor = require('../models/user.model');
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+const requireAuthinstructor = require('../Middleware/Autho')
+router.use(
+  requireAuthinstructor
+  );
 
 const projection = { __v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0 };
 

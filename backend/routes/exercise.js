@@ -1,5 +1,11 @@
 const router = require('express').Router();
 let Exercise = require('../models/exercise.model');
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+const requireAuthinstructor = require('../Middleware/Autho');
+router.use(
+  requireAuthinstructor
+  );
 
 router.route('/:id').get( async (req, res) => {
   const id = req.params.id;

@@ -1,5 +1,11 @@
 const router = require('express').Router();
 let Course = require('../models/course.model');
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+const requireAuthcorpTrainee = require('../Middleware/Autho')
+router.use(
+    requireAuthcorpTrainee
+  );
 const projection = {__v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0, price: 0};
 
 

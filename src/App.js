@@ -19,10 +19,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import CountriesList from './components/CountriesList';
 import Home from './components/Home';
+import Register from './components/Register';
+import Login from './components/Login';
 import countries from './countries.json';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import InstructorsList from './components/InstructorsList';
+import Register from './components/Register';
 
 
 function App() {
@@ -81,8 +84,10 @@ function App() {
           <Route path='/exercise/:id' element={<ExerciseView user={user}/>}/>
           <Route path='/course/:id/exercises' element={<ExerciseList user={user}/>}/>
           <Route path='/course/:id/add-exercise' element={<AddExercise/>}/>
-                    <Route path='/editInfo' element={<ResetPassword/>}/>
+          <Route path='/editInfo' element={<ResetPassword/>}/>
           <Route path='/reset-password/:userid/:token' element={<ValidateMail/>}/>
+          <Route path='/home/register' element={<Register/>}/>
+          <Route path='/home' element={<Login/>}/>
       
 
         </Routes>

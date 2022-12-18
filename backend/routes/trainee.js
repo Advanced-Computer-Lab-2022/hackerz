@@ -1,5 +1,11 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+const requireAuthindividualTrainee = require('../Middleware/Autho')
+router.use(
+    requireAuthindividualTrainee
+  );
 
 router.route('/').get((req, res) => {
   User.find()

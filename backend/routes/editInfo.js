@@ -116,6 +116,8 @@ router.route('/forget-password').post (async (req,res) =>{
       var doc = await User.findOneAndUpdate({useremail:useremail}, {password:newpassword}, {
         new: true
       });
+    
+      
       res.json("Password updated successfully");}
       else{
         res.json("Passwordsdo not match ");
