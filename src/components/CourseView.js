@@ -4,9 +4,9 @@ import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
+// import { NavLink } from 'react-router-dom';
 
 export default function CourseView(props) {
     const [course, setCourse] = useState([]);
@@ -14,6 +14,8 @@ export default function CourseView(props) {
     const fetchCourse = async () => {
         const response = await axios.get(APIURL + '/courses/' + id)
         const data = response.data;
+       // const link = "/course/" + course._id;
+
         console.log(data); //testing purposes
         setCourse(data);
     }
@@ -23,7 +25,13 @@ export default function CourseView(props) {
 
     return (
     <Card className="mt-4 w-50 mx-auto">
-      <Card.Header><strong>{course.title} by {course.instructorUsername}</strong></Card.Header>
+      <Card.Header>
+        <strong>{course.title} by {course.instructorUsername}</strong>
+        <Button style={{float: 'right'}} className="w-15 mx-auto mb-3" variant="primary">Report</Button>
+        {/* <NavLink to={link}>Report</NavLink> */}
+        {/* <button onclick="window.location.href='b.php'">Report</button> */}
+      </Card.Header>
+      
       <Card.Body>
         <Card.Title>{course.description}</Card.Title><br/>
         {
@@ -43,6 +51,7 @@ export default function CourseView(props) {
               <Badge bg="primary" pill>
                 {subtitle.duration} hours
               </Badge>
+    
             </ListGroup.Item>
           })}
             </div>

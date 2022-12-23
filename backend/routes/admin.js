@@ -39,7 +39,7 @@ router.route('/addinst').post((req, res) => {
   newUser.save() 
     .then(() => res.json('User added!'))
     .catch(err => res.status(400).json('Error: ' + err)); //adds it to db and if it fails it throws an error
-    .catch(err => res.status(400).json('Error: ' + err)); //adds it to db and if it fails it throws an error
+    
 });
 
 //add a corporate tranees
