@@ -8,7 +8,7 @@ import ReactStars from 'react-rating-stars-component';
 
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
-
+axios.defaults.withCredentials = true;
 export default function CourseView({user}) {
     const [course, setCourse] = useState([]);
     const [enrolled, setEnrolled] = useState(false);

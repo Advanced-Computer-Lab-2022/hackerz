@@ -14,19 +14,23 @@ function Login(){
 
 const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    const userpassword= userpassref.current.value;
     const useremail = useremailref.current.value;
+   const password= userpassref.current.value;
+    
    
 
-    const params = { useremail, userpassword }
-    const response = await axios.get(APIURL + '/home', { params },{  withCredentials: true,credentials: "include"})
+    const params = { useremail, password }
+    const response = await axios.post(APIURL + '/home', { params })
     alert(response.data);
+   // console.log(response.data);
+    //alert( useremail +"" + password) ;
   }
 
   return (
     
         <>
+        <div>Please Log in first to be authorized user
+        </div>
           <form onSubmit= {handleSubmit}>
            
             
@@ -38,7 +42,7 @@ const handleSubmit = async (event) => {
             <label>Please Enter your Password</label>
             <input className="m-1" ref={userpassref} placeholder="User Password" type="password" required/>
             </div>
-          
+            <input type="submit" />
            
           </form>
         </>

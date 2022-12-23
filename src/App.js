@@ -22,9 +22,12 @@ import Home from './components/Home';
 import Register from './components/Register';
 import Login from './components/Login';
 import countries from './countries.json';
+import CorpAuth from './components/CorpAuth';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import InstructorsList from './components/InstructorsList';
+import AdminAuth from './components/AdminAuth';
+import InstructorAuth from './components/InstructorAuth';
 //import Register from './components/Register';
 
 
@@ -75,12 +78,12 @@ function App() {
           <Route path='/instructor' element={<InstructorsList/>}/>
           <Route path='/search' element={<Search/>}/>
           <Route path='/course/:id' element={<CourseView user={user}/>}/>
-          <Route path='/corp' element={<CorpCourses/>}/>
-          <Route path='/instructor/my-courses' element={<InstructorCourses user={user}/>}/>
+          <Route path='/corp' element={<CorpAuth/>}/>
+          <Route path='/instructor/my-courses' element={<InstructorAuth user={user}/>}/>
           <Route path='/instructor/add-course' element={<AddCourse user={user}/>}/>
           <Route path='/instructor/editbiography' element={<EditBiography user={user}/>}/>
           <Route path='/instructor/editusermail' element={<EditMail user={user}/>}/>
-          <Route path='/admin' element={<AdminPanel/>}/>
+          <Route path='/admin' element={<AdminAuth/>}/>
           <Route path='/exercise/:id' element={<ExerciseView user={user}/>}/>
           <Route path='/course/:id/exercises' element={<ExerciseList user={user}/>}/>
           <Route path='/course/:id/add-exercise' element={<AddExercise/>}/>

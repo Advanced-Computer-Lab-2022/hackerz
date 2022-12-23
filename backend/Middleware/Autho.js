@@ -6,17 +6,24 @@ const requireAuthadmin = (req, res, next) => {
     
   // check json web token exists & is verified
   if (token) {
-    jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, userinfo) => {
+     jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, userinfo) => {
       if (err) {
-        // console.log('You are not logged in.');
-        // res send status 401 you are not logged in
-        res.status(401).json({message:"You are not logged in."})
-        // res.redirect('/login');
+       // res.redirect(' http://localhost:3000/home');
+        res.json({message:"Unauthorised"})
+        //res.redirect('./routes/home');
+       // response.end();
+    
       } else {
         if(userinfo.usertype != "admin"){
-            res.status(401).json({message:"Unauthorised"})
+          //res.redirect(' http://localhost:3000/home');
+          res.json({message:"Unauthorised"})
+          
+         // res.redirect('./routes/home');
+          //response.end();
         }
-        else{ next();}
+        else{ 
+          
+          next();}
         //console.log(decodedToken);
         //const type = decodedtoken.type;
 
@@ -24,7 +31,11 @@ const requireAuthadmin = (req, res, next) => {
       }
     });
   } else {
-    res.status(401).json({message:"You are not logged in."})
+  //  res.redirect(' http://localhost:3000/home');
+    res.json({message:"Unauthorised"})
+   // response.end();
+    
+  
   }
 };
 const requireAuthinstructor = (req, res, next) => {
@@ -36,11 +47,11 @@ const requireAuthinstructor = (req, res, next) => {
         if (err) {
           // console.log('You are not logged in.');
           // res send status 401 you are not logged in
-          res.status(401).json({message:"You are not logged in."})
+          res.status(401).json({message:"Unauthorised"})
           // res.redirect('/login');
         } else {
           if(userinfo.usertype != "instructor"){
-              res.status(401).json({message:"Unauthorised"})
+            res.status(401).json({message:"Unauthorised"})
           }
           else{ next();}
           //console.log(decodedToken);
@@ -50,7 +61,7 @@ const requireAuthinstructor = (req, res, next) => {
         }
       });
     } else {
-      res.status(401).json({message:"You are not logged in."})
+      res.status(401).json({message:"Unauthorised"})
     }
   };
 
@@ -63,7 +74,7 @@ const requireAuthinstructor = (req, res, next) => {
         if (err) {
           // console.log('You are not logged in.');
           // res send status 401 you are not logged in
-          res.status(401).json({message:"error."})
+          res.status(401).json({message:"Unauthorised"})
           // res.redirect('/login');
         } else {
           if(userinfo.usertype != 'individualTrainee'){
@@ -77,7 +88,7 @@ const requireAuthinstructor = (req, res, next) => {
         }
       });
     } else {
-      res.status(401).json({message:"You are not logged in, no token"})
+      res.status(401).json({message:"Unauthorised"})
     }
   };
 
@@ -90,7 +101,7 @@ const requireAuthinstructor = (req, res, next) => {
         if (err) {
           // console.log('You are not logged in.');
           // res send status 401 you are not logged in
-          res.status(401).json({message:"error."})
+          res.status(401).json({message:"Unauthorised"})
           // res.redirect('/login');
         } else {
           if(userinfo.usertype != 'corpTrainee'){
@@ -104,7 +115,7 @@ const requireAuthinstructor = (req, res, next) => {
         }
       });
     } else {
-      res.status(401).json({message:"You are not logged in,no token"})
+      res.status(401).json({message:"Unauthorised"})
     }
   };
 

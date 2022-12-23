@@ -49,6 +49,7 @@ const handleSubmit = async (event) => {
             <label>Please Enter your country</label>
             <input className="m-1" ref={countryref} placeholder="user country" type="text"/>
             </div>
+            <input type="submit" />
           </form>
         </>
       

@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React, {useRef} from 'react';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -9,6 +9,8 @@ const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
 export default function AdminPanel() {
+  
+
     const instructorUsernameRef = useRef();
     const instructorPasswordRef = useRef();
     const corpUsernameRef = useRef();
@@ -83,4 +85,10 @@ export default function AdminPanel() {
     </Card>
     </>
   )
+  
+      
+            
+        
+    
+  
 }
