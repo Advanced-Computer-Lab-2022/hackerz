@@ -38,7 +38,7 @@ app.use(cors(corsOptions));
   //app.use(allowCrossDomain);
   //some other code
 //});
-
+app.use("C:/Users/Lenovo/OneDrive/Desktop/project_marwan/hackerz/Certificate.pdf", express.static("C:/Users/Lenovo/OneDrive/Desktop/project_marwan/hackerz/Certificate.pdf"));
 const uri = process.env.MONGO_URI;
 mongoose.connect(uri, { useNewUrlParser: true });
 const connection = mongoose.connection;

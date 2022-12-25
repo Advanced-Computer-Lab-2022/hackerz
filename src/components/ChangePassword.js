@@ -1,4 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
+import { useNavigate } from "react-router-dom";
 //import CoursesList from './CoursesList';
 //import ReactDOM from 'react-dom/client';
 const axios = require('axios').default;
@@ -8,7 +9,7 @@ function ChangePassword(){
     const OldPassref = useRef();
     const Passref = useRef();
     const ConfirmPassref = useRef();
-
+    let navigate = useNavigate();
     const Change_password = async () => {      
         const usermail = UserMailref.current.value;
         const oldPass= OldPassref.current.value;
@@ -18,6 +19,7 @@ function ChangePassword(){
          const response = await axios.post(APIURL + '/editInfo/forget-password/',
           { params });
          alert(response.data);
+         return navigate('/home');
  
          } 
          ///reset-password/:id/:token

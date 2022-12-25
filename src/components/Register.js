@@ -1,4 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
+import { useNavigate } from "react-router-dom";
 //import CoursesList from './CoursesList';
 //import ReactDOM from 'react-dom/client';
 const axios = require('axios').default;
@@ -10,7 +11,7 @@ function Register(){
     const confirmpassref= useRef();
   //  const emailref= useRef();
     const countryref= useRef();
-
+    let navigate = useNavigate();
 
 const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,8 +22,9 @@ const handleSubmit = async (event) => {
     const usercountry = countryref.current.value;
 
     const params = { username, userpassword, confirmpasswrod, usercountry, useremail }
-    const response = await axios.get(APIURL + '/home/register', { params })
+    const response = await axios.post(APIURL + '/home/register', { params })
     alert(response.data);
+    return navigate('/home');
   }
 
   return (

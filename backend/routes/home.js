@@ -16,13 +16,15 @@ const maxAge = 3 * 24 * 60 * 60;
 //next();
 //});
 router.route('/register').post(async (req, res) => {
-  const { name, password, confirmpass, country, email } = req.body;
-  try {
-    if (password != confirmpass) {
+ // const { name, password, confirmpass, country, email } = req.body.params;
+  const { username, userpassword, confirmpasswrod, usercountry, useremail } = req.body.params;
+  
+    console.log(username);
+    if (userpassword != confirmpasswrod) {
       res.json("passwords do not match");
     }
     else {
-      User.exists({ useremail: email }, async function (err, doc) {
+      User.exists({ useremail: useremail }, async function (err, doc) {
         if (err) {
           console.log(err);
         } else {
@@ -32,25 +34,22 @@ router.route('/register').post(async (req, res) => {
           else {
 
             const salt = await bcrypt.genSalt();
-            const hashedPassword = await bcrypt.hash(password, salt);
-            const newUser = new User({ username: name, firstlog: false, userType: 'individualTrainee', password: hashedPassword, rating: undefined, country: country, userbiography: "", useremail: email, enrolledCourses: [], exercises: [] });// creates a new user
+            const hashedPassword = await bcrypt.hash(userpassword, salt);
+            const newUser = new User({ username: username, firstlog: false, userType: 'individualTrainee', password: hashedPassword, rating: undefined, country: usercountry, userbiography: "", useremail: useremail, enrolledCourses: [], exercises: [] });// creates a new user
 
-            newUser.save().then() .catch(err => res.status(400).json('Error: ' + err)); //adds it to db and if it fails it throws an error
+            newUser.save().then() .catch(err => res.json('Error: ' + err)); //adds it to db and if it fails it throws an error
             const userinfo = {
-              useremail: email,
-              usertype: type
+              useremail: useremail,
+              usertype: 'individual Trainee'
             }
-
-            res.redirect('/home');
+            res.json("success");
+            //res.redirect('/home');
           }
         }
       })
     }
 
-  }
-  catch (error) {
-    res.status(400).json({ error: error.message })
-  }
+  
 });
 
 router.route('/').post(async (req, res) => {
@@ -68,7 +67,7 @@ router.route('/').post(async (req, res) => {
         usertype: user.userType
       }
 
-      if(user.firstlog || user.useremail === "beedoz377@gmail.com"){
+      if(user.firstlog ){
         if(user.password != password){
           res.json("invalid credetianls");
         }

@@ -105,18 +105,20 @@ router.route('/reset-password/:id/:token').post(async(req,res)=>{
 
 });
 router.route('/forget-password').post (async (req,res) =>{
-  var useremail = req.query.useremail;
-  var password = req.query.password;
-  var newpassword= req.query.newpassword;
-  var ConfirmNewPassword = req.query.ConfirmNewPassword;
+  var useremail = req.body.params.usermail;
+  var password = req.body.params.oldPass;
+  var newpassword= req.body.params.Pass;
+  var ConfirmNewPassword = req.body.params.confirmPass;
   
   User.exists({useremail:useremail , password:password}, async function (err, doc) {
     if (err){
       console.log(err);
     }
     if (doc){ 
-      if(password===newpassword){
+      console.log(newpassword)
+      if(ConfirmNewPassword===newpassword){
         const salt = await bcrypt.genSalt();
+        console.log(salt);
         const hashedPassword = await bcrypt.hash(newpassword, salt);
       var doc = await User.findOneAndUpdate({useremail:useremail}, {password:hashedPassword}, {
         new: true
