@@ -4,9 +4,9 @@ let Instructor = require('../models/user.model');
 const cookieParser = require('cookie-parser');
 
 const { requireAuthadmin ,requireAuthinstructor, requireAuthindividualTrainee , requireAuthcorpTrainee } = require('../Middleware/Autho')
-router.use(
-  requireAuthinstructor
-  );
+//router.use(
+  //requireAuthinstructor
+  //);
 
 const projection = { __v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0 };
 
@@ -31,7 +31,7 @@ router.route('/:user').get(async(req, res) => {
   res.json(user)
 });
 
-router.route('/:user/my-courses').get(async (req, res) => {
+router.route('/:user/my-courses').get(requireAuthinstructor,async (req, res) => {
   const searchString = req.query.query;
   const user = req.params.user;
   const regExp = new RegExp(searchString, 'i');  //case-insensitive regular expression
@@ -63,7 +63,7 @@ router.route('/:user/my-courses').get(async (req, res) => {
 
 });
 
-router.route('/:user/add-course').post((req, res) => {
+router.route('/:user/add-course').post(requireAuthinstructor,(req, res) => {
   const title = req.body.title;
   const description = req.body.description;
   const instructorUsername = req.params.user;
@@ -86,7 +86,7 @@ router.route('/:user/add-course').post((req, res) => {
     .then(() => res.json('Course added!'))
     .catch(err => res.status(500).json('Error: ' + err));
 });
-router.route('/:username/editbiography').post( async (req, res) => {
+router.route('/:username/editbiography').post( requireAuthinstructor,async (req, res) => {
   var userbiography = req.body.userbiography;
   var username = req.params.username;
   var doc = await Instructor.findOneAndUpdate({username}, {userbiography:userbiography}, {
@@ -94,7 +94,7 @@ router.route('/:username/editbiography').post( async (req, res) => {
    });
    res.json("biography successfully updated");
 });
-router.route('/:username/editusermail').post( async (req, res) => {
+router.route('/:username/editusermail').post(requireAuthinstructor,async (req, res) => {
  var useremail = req.body.useremail;
  var username = req.params.username;
  var doc = await Instructor.findOneAndUpdate({username}, {useremail:useremail}, {

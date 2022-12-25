@@ -28,6 +28,8 @@ import './style.css';
 import InstructorsList from './components/InstructorsList';
 import AdminAuth from './components/AdminAuth';
 import InstructorAuth from './components/InstructorAuth';
+import ReceiveCertificate from './components/ReceiveCertificate';
+import ChangePassword from './components/ChangePassword';
 //import Register from './components/Register';
 
 
@@ -91,6 +93,8 @@ function App() {
           <Route path='/reset-password/:userid/:token' element={<ValidateMail/>}/>
           <Route path='/home/register' element={<Register/>}/>
           <Route path='/home' element={<Login/>}/>
+          <Route path='/certificate' element={<ReceiveCertificate/>}/>
+          <Route path='/editInfo/forget-password' element={<ChangePassword/>}/>
       
 
         </Routes>

@@ -4,6 +4,7 @@ let countries = require('../../src/countries.json');
 const Exercise = require('../models/exercise.model');
 //const User = require('../models/user.model');
 const projection = {__v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
+const { requireAuthadmin ,requireAuthinstructor, requireAuthindividualTrainee , requireAuthcorpTrainee }= require('../Middleware/Autho')
 
 router.route('/').get(async (req, res) => {
     const searchString = req.query.query;
@@ -65,7 +66,7 @@ router.route('/:id').get((req, res) => {
     res.json(response);
   });
 
-router.route('/:course/add-exercise').post( async (req, res) => {
+router.route('/:course/add-exercise').post( requireAuthinstructor,async (req, res) => {
     const title = req.body.title;
     const questions = req.body.questions;
     const course = req.params.course;

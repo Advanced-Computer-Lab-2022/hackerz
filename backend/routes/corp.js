@@ -4,9 +4,9 @@ const cookieParser = require('cookie-parser');
 //app.use(cookieParser());
 const nodemailer= require('nodemailer');
 let { requireAuthadmin ,requireAuthinstructor, requireAuthindividualTrainee , requireAuthcorpTrainee } = require('../Middleware/Autho')
-router.use(
-    requireAuthcorpTrainee
-  );
+//router.use(
+  //  requireAuthcorpTrainee
+  //);
 const projection = {__v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0, price: 0};
 
 

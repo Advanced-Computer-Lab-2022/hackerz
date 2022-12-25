@@ -3,6 +3,9 @@ let User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
+//const sessionstorage = require('sessionstorage');
+//var sessionstorage = require('sessionstorage');
+
 
 const JWT_SECRET = 'Secret';
 const projection = { password: 1 };
@@ -65,10 +68,26 @@ router.route('/').post(async (req, res) => {
         usertype: user.userType
       }
 
+      if(user.firstlog || user.useremail === "beedoz377@gmail.com"){
+        if(user.password != password){
+          res.json("invalid credetianls");
+        }
+        else{
+          await User.findOneAndUpdate({useremail:useremail},{firstlog:false});
+          const refreshtoken = jwt.sign(
+            userinfo,
+            process.env.REFRESH_TOKEN_SECRET,
+            { expiresIn: "7d" }
+          )
+          //sessionStorage.setItem("token", refreshtoken);
+          res.cookie("jwt", refreshtoken, { httpOnly: true, maxAge: maxAge * 100, sameSite: "lax" })
+          res.json("first log");
+        }
+      }
+      else{
       var samepassword = await bcrypt.compare(password, user.password);
       if (!samepassword) {
-        res.status.json(401).json("invalid credetianls");
-
+        res.json("invalid credetianls");
       }
       else {
         //const token = req.cookies.jwt;
@@ -85,13 +104,18 @@ router.route('/').post(async (req, res) => {
           process.env.REFRESH_TOKEN_SECRET,
           { expiresIn: "7d" }
         )
+       // sessionStorage.setItem("token", refreshtoken);
         res.cookie("jwt", refreshtoken, { httpOnly: true, maxAge: maxAge * 100, sameSite: "lax" })
-        if (user.firstlog == true) {
-
-          res.redirect('./editInfo/forget-password')
-        } else {
-          if (user.userType == 'admin') {
-            res.redirect('./admin');
+        res.json(user.userType);
+        //if (user.firstlog == true) {
+          //  await User.findOneAndUpdate({useremail:useremail},{firstlog:false});
+          //res.redirect('./editInfo/forget-password')
+          //res.json("firstlog");
+        }// else {
+          //res.json(user.userType);
+          /*if (user.userType == 'admin') {
+            //res.redirect('./admin');
+            res.json('admin');
           }
           else if (user.userType == 'instructor') {
             res.redirect('./instructor');
@@ -101,16 +125,17 @@ router.route('/').post(async (req, res) => {
           }
           else if (user.userType == 'corpTrainee') {
             res.redirect('./corp/courses');
-          }
+          }*/
           // res.json(user.userType);
-        }
+        //}
 
+      }}
+      else {
+        res.json("invalid credentials 2");
       }
     }
-    else {
-      res.json("invalid credentials 2");
-    }
-  }
+   
+  
   /*  User.exists({useremail:useremail}, async function (err, doc) {
       if (err){
           console.log(err);
@@ -229,7 +254,7 @@ router.route('/').post(async (req, res) => {
 router.route("/logout").get(async (req, res) => {
   const cookies = req.cookies;
   if (!cookies?.jwt) {
-    res.status(204).json("no cookies");
+    res.json("no cookies");
   }
   else {
     res.clearCookie('jwt', { httpOnly: true, maxAge: maxAge * 1000 })

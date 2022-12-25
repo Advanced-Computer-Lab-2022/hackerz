@@ -1,14 +1,15 @@
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
+//const sessionstorage = require('sessionstorage');
+//'use strict';
 //app.use(cookieParser());
 const requireAuthadmin = (req, res, next) => {
   const token = req.cookies.jwt;
-    
+ //  const token= sessionStorage.getItem("token"); 
   // check json web token exists & is verified
   if (token) {
      jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, userinfo) => {
       if (err) {
-       // res.redirect(' http://localhost:3000/home');
         res.json({message:"Unauthorised"})
         //res.redirect('./routes/home');
        // response.end();
@@ -40,7 +41,7 @@ const requireAuthadmin = (req, res, next) => {
 };
 const requireAuthinstructor = (req, res, next) => {
     const token = req.cookies.jwt;
-      
+   // const token= sessionStorage.getItem("token"); 
     // check json web token exists & is verified
     if (token) {
       jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, userinfo) => {
@@ -67,7 +68,7 @@ const requireAuthinstructor = (req, res, next) => {
 
   const requireAuthindividualTrainee = (req, res, next) => {
     const token = req.cookies.jwt;
-      
+    //const token= sessionStorage.getItem("token"); 
     // check json web token exists & is verified
     if (token) {
       jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, userinfo) => {
@@ -94,7 +95,7 @@ const requireAuthinstructor = (req, res, next) => {
 
   const requireAuthcorpTrainee = (req, res, next) => {
     const token = req.cookies.jwt;
-      
+   // const token= sessionStorage.getItem("token"); 
     // check json web token exists & is verified
     if (token) {
       jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, userinfo) => {
@@ -118,5 +119,30 @@ const requireAuthinstructor = (req, res, next) => {
       res.status(401).json({message:"Unauthorised"})
     }
   };
+  const requireAuthInstandtrainee = (req, res, next) => {
+    const token = req.cookies.jwt;
+   //const token= sessionStorage.getItem("token"); 
+    if (token) {
+       jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, userinfo) => {
+        if (err) {
+          res.json({message:"Unauthorised"})
+      
+        } else {
+          if(userinfo.usertype === "admin"){
+            res.json({message:"Unauthorised"})
+          }
+          else{ 
+            
+            next();}
+        }
+      });
+    } else {
+      res.json({message:"Unauthorised"})   
+    }
+  };
 
-module.exports = { requireAuthadmin ,requireAuthinstructor, requireAuthindividualTrainee , requireAuthcorpTrainee };
+
+
+
+
+module.exports = { requireAuthadmin ,requireAuthinstructor, requireAuthindividualTrainee , requireAuthcorpTrainee ,requireAuthInstandtrainee};

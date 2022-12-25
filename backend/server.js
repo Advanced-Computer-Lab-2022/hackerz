@@ -59,6 +59,7 @@ const exerciseRouter = require('./routes/exercise');
 const traineeRouter = require('./routes/trainee');
 const editInfoRouter = require('./routes/editInfo');
 const homeRouter = require('./routes/home');
+const certificateRouter = require('./routes/Certificate')
 //const editPersonalRouter = require('./routes/editPersonal');
 
 app.use('/admin', adminRouter);
@@ -69,6 +70,7 @@ app.use('/exercise', exerciseRouter);
 app.use('/trainee', traineeRouter);
 app.use('/editInfo', editInfoRouter);
 app.use('/home',homeRouter);
+app.use('/Certificate',certificateRouter)
 //app.use('/editPersonal', editPersonalRouter);
 
 app.listen(port, () => {

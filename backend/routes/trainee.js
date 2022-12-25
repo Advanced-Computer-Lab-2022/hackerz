@@ -3,9 +3,9 @@ let User = require('../models/user.model');
 const cookieParser = require('cookie-parser');
 //app.use(cookieParser());
 const { requireAuthadmin ,requireAuthinstructor, requireAuthindividualTrainee , requireAuthcorpTrainee }= require('../Middleware/Autho')
-router.use(
-    requireAuthindividualTrainee
-  );
+//router.use(
+  //  requireAuthindividualTrainee
+  //);
 
 router.route('/').get((req, res) => {
   User.find()
@@ -13,7 +13,7 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(500).json('Error: ' + err));
 });
 
-router.route('/:user/:course/enroll').post( async (req, res) => {
+router.route('/:user/:course/enroll').post(requireAuthindividualTrainee, async (req, res) => {
     const user = req.params.user;
     const course = req.params.course;
     const currentUser = await User.findOne({username: user});
@@ -33,7 +33,7 @@ router.route('/:user/:course/isEnrolled').get( async (req,res) => {
     else res.json(false);
    
 });
-router.route('/:user/:exercise/save-score').post( async (req, res) => {
+router.route('/:user/:exercise/save-score').post(requireAuthindividualTrainee, async (req, res) => {
     
     const user = req.params.user;
     const id = req.params.exercise;

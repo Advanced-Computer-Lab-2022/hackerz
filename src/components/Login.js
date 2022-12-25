@@ -1,12 +1,15 @@
 import React, {useEffect, useState, useRef} from 'react';
+import { useNavigate } from "react-router-dom";
 //import CoursesList from './CoursesList';
 //import ReactDOM from 'react-dom/client';
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
+
 function Login(){
      const useremailref = useRef();
     const userpassref = useRef();
+    let navigate = useNavigate();
   
   //  const emailref= useRef();
     
@@ -20,8 +23,18 @@ const handleSubmit = async (event) => {
    
 
     const params = { useremail, password }
-    const response = await axios.post(APIURL + '/home', { params })
+    const response = await axios.post(APIURL + '/home', { params },{   withCredentials: true
+    })
     alert(response.data);
+    if(response.data== "first log"){
+      return navigate('/editInfo/forget-password');
+    }
+    else if(response.data=="instructor"){
+      return navigate('/instructor/my-courses');
+    }
+    else if(response.data== "'admin'"){
+      return navigate('/admin');
+    }
    // console.log(response.data);
     //alert( useremail +"" + password) ;
   }

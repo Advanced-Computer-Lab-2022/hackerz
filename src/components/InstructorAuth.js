@@ -11,8 +11,8 @@ function InstructorAuth({user}){
     const username = user.username;
     const [flag, setFlag] = useState(false);
      let navigate = useNavigate();
-     const [user, setUser] = useState({username: ""});
-     setUser({username: username})
+     const [user1, setUser1] = useState({username: ""});
+     setUser1({username: username})
     
 const validateResponse = async (req,res) => {
     const response = await axios.get(APIURL + '/instructor/' + username + '/my-courses', { })
