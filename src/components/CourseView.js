@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 const axios = require('axios').default;
-const APIURL = "http://localhost:5000";
+const APIURL = "http://localhost:8000";
 
 export default function CourseView(props) {
     const [course, setCourse] = useState([]);

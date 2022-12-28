@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react';
 import CoursesList from './CoursesList';
 const axios = require('axios').default;
-const APIURL = "http://localhost:5000";
+const APIURL = "http://localhost:8000";
 
 function CorpCourses() {
   const [courses, setCourses] = useState([]);

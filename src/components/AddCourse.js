@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react'
-import PopUp from "./PopUp";
+//import PopUp from "./PopUp";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
@@ -7,9 +7,10 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
+import PopUp from './PopUp';
 import { set } from 'mongoose';
 const axios = require('axios').default;
-const APIURL = "http://localhost:5000";
+const APIURL = "http://localhost:8000";
 
 export default function AddCourse({user}) {
     const titleRef = useRef();
