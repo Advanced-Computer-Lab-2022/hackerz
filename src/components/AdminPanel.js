@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 const axios = require('axios').default;
-const APIURL = "http://localhost:5000";
+const APIURL = "http://localhost:8000";
 
 export default function AdminPanel() {
     const instructorUsernameRef = useRef();

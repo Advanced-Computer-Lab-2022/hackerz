@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 const axios = require('axios').default;
-const APIURL = "http://localhost:5000";
+const APIURL = "http://localhost:8000"; //change to 5000
 
 export default function AddCourse({user}) {
     const titleRef = useRef();
