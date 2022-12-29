@@ -12,7 +12,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import CountriesList from './components/CountriesList';
 import countries from './countries.json';
-import Report from './components/Report'
+import Report from './components/Report';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 

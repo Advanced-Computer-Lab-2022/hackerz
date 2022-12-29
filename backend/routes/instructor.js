@@ -97,6 +97,14 @@ router.route('/watchLink/:coursetitle/:subtitle').get(async(req, res) => {
     //watch link frontend
 });
 
+
+// router.route('/:user/my-courses/report/:user/:coursetitle').post( async (req, res) => {
+// const user = req.params.user;
+// const course = req.params.coursetitle;//how to get course id
+
+// });
+
+
 // router.route('/:id').delete((req, res) => {
 //   Course.findByIdAndDelete(req.params.id)
 //     .then(() => res.json('Course deleted.'))
