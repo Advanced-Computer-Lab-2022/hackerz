@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import { Route, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 const axios = require('axios').default;
-const APIURL = "http://localhost:5000";
-//import { Link } from 'react-router-dom';
-//import Report from './components/Report';
-
+const APIURL = "http://localhost:8000";
+// import { NavLink } from 'react-router-dom';
 
 export default function CourseView(props) {
     const [course, setCourse] = useState([]);
@@ -30,11 +28,7 @@ export default function CourseView(props) {
       <Card.Header>
         <strong>{course.title} by {course.instructorUsername}</strong>
         <Button style={{float: 'right'}} className="w-15 mx-auto mb-3" variant="primary">Report</Button>
-        <Route
-        path = "/instructor/my-courses/report"
-        //element ={<Report/>}
-        />
-         {/* <Link to={link}>Report</Link>  */}
+        {/* <NavLink to={link}>Report</NavLink> */}
         {/* <button onclick="window.location.href='b.php'">Report</button> */}
       </Card.Header>
       
