@@ -6,11 +6,12 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 const axios = require('axios').default;
 const APIURL = "http://localhost:8000";
-// import { NavLink } from 'react-router-dom';
 
 export default function CourseView(props) {
     const [course, setCourse] = useState([]);
     let {id} = useParams();
+    
+
     const fetchCourse = async () => {
         const response = await axios.get(APIURL + '/courses/' + id)
         const data = response.data;
@@ -23,13 +24,11 @@ export default function CourseView(props) {
         fetchCourse(); // eslint-disable-next-line
     },[])
 
+
     return (
     <Card className="mt-4 w-50 mx-auto">
       <Card.Header>
         <strong>{course.title} by {course.instructorUsername}</strong>
-        <Button style={{float: 'right'}} className="w-15 mx-auto mb-3" variant="primary">Report</Button>
-        {/* <NavLink to={link}>Report</NavLink> */}
-        {/* <button onclick="window.location.href='b.php'">Report</button> */}
       </Card.Header>
       
       <Card.Body>

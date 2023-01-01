@@ -62,7 +62,7 @@ function App() {
           <Route path='/instructor/my-courses' element={<InstructorCourses user={user}/>}/>
           <Route path='/instructor/add-course' element={<AddCourse user={user}/>}/>
           <Route path='/admin' element={<AdminPanel/>}/>
-          <Route path='/instructor/my-courses/report' element={<Report/>}/>
+          <Route path='/report' element={<Report/>}/>
 
         </Routes>
       </BrowserRouter>

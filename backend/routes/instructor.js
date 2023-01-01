@@ -99,33 +99,6 @@ router.route('/watchLink/:coursetitle/:subtitle').get(async(req, res) => {
 });
 
 
-router.route('/:user/my-courses/report/:user/:coursetitle').post( async (req, res) => {
-  const user = req.params.user;
-  const course = req.params.coursetitle;  //how to get course id
-
-  const type = req.body.repType;
-  const description = req.body.description;
-
-  // if the user didn't fill all fields
-  if(!req.body.repType || !req.body.description){
-    res.status(400)
-    throw new Error('Please fill all fields.')
-  }
-
-  // Add new report in the database
-  const report = await Report.create({
-    repType: req.body.repType,
-    description: req.body.description,
-    user: req.params.user,
-    course: req.params.course,
-})
-
-res.status(200).json(report)
-
-
-});
-
-
 // router.route('/:id').delete((req, res) => {
 //   Course.findByIdAndDelete(req.params.id)
 //     .then(() => res.json('Course deleted.'))

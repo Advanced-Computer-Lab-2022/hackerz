@@ -15,6 +15,12 @@ course: {//course id
     required: true,
     ref: 'Course'
 },
+userType: {
+  type: String,
+  // required: true,
+  enum : ['Unseen','Pending','Resloved'],
+  default: 'Unseen'
+},
 }, {
   timestamps: true,
 });

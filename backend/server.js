@@ -21,11 +21,13 @@ const adminRouter = require('./routes/admin');
 const instructorRouter = require('./routes/instructor');
 const coursesRouter = require('./routes/courses');
 const corpRouter = require('./routes/corp');
+const reportRouter = require('./routes/report');
 
 app.use('/admin', adminRouter);
 app.use('/instructor', instructorRouter);
 app.use('/courses', coursesRouter);
 app.use('/corp', corpRouter);
+app.use('/report', reportRouter)
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

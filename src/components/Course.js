@@ -3,11 +3,17 @@ import Card from 'react-bootstrap/Card';
 import { NavLink } from 'react-router-dom';
 import countries from '../countries.json';
 import { my_country } from './Country';
+import { useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
 
 export default function Course(props) {
+  let navigate = useNavigate();
   const course = props.course;
   const corp = props.corp;
   const link = "/course/" + course._id;
+  const reportNavigate = () => {
+    return navigate('/report');
+  }
   return (
     <Card style={{width:"18%"}} className="m-3">
       <Card.Body>
@@ -21,6 +27,8 @@ export default function Course(props) {
               <span style={{color: "red"}}>FREE</span> 
               : <>for {countries[my_country].currency} {course.price}</>):<></>}</Card.Footer>:<></>}
       </Card.Body>
+      <Button onClick={reportNavigate} style={{backgroundColor: 'red'}} className="w-15 mx-auto mb-3" variant="primary"
+      courseid={course._id}>Report</Button>
     </Card>
   )
 }
