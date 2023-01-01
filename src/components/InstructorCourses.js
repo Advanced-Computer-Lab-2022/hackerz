@@ -36,7 +36,7 @@ function InstructorCourses({ user }) {
   return (
     <div className="m-3">
       <div>
-        Rating: {rating}/5
+        My Instructor Rating: {rating}/5
       </div>
       <input className="m-1" ref={searchRef} placeholder="Search" type="search" />
       <button onClick={searchCourses}>Search</button>

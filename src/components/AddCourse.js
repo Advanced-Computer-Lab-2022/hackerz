@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
@@ -17,52 +17,51 @@ export default function AddCourse({user}) {
     const subtitle1TitleRef = useRef();
     const subtitle1DurationRef = useRef();
     const subtitle1DescriptionRef = useRef();
-    const subtitle2TitleRef = useRef();
-    const subtitle2DurationRef = useRef();
-    const subtitle2DescriptionRef = useRef();
-    const subtitle3TitleRef = useRef();
-    const subtitle3DurationRef = useRef();
-    const subtitle3DescriptionRef = useRef();
-  
+    const previewRef = useRef();
+    const subtitleVidRef = useRef();
+    const subtitleVidDescRef = useRef();
+    const [subtitles, setSubtitles] = useState([]);
+    var subtitlesCount = "";
+
+    const addSubtitle = () => {
+      const subtitle1Title = subtitle1TitleRef.current.value;
+      const subtitle1Duration= Number(subtitle1DurationRef.current.value);
+      const subtitle1Description= subtitle1DescriptionRef.current.value;
+      const videoURL = subtitleVidRef.current.value;
+      const videoDescription = subtitleVidDescRef.current.value;
+      const subtitle = {title: subtitle1Title ,description: subtitle1Description ,duration: subtitle1Duration, videoURL, videoDescription}
+      setSubtitles(subtitles.concat(subtitle))
+      subtitle1TitleRef.current.value = "";
+      subtitle1DurationRef.current.value = "";
+      subtitle1DescriptionRef.current.value = "";
+      subtitleVidRef.current.value = "";
+      subtitleVidDescRef.current.value = "";
+      console.log(subtitles);
+    }
+
     const addCourse = async () => {
         const title = titleRef.current.value;
         const subject = subjectRef.current.value;
         const price = Number(priceRef.current.value);
         const description = descriptionRef.current.value;
-        const subtitle1Title = subtitle1TitleRef.current.value;
-        const subtitle2Title = subtitle2TitleRef.current.value;
-        const subtitle3Title = subtitle3TitleRef.current.value;
-        const subtitle1Duration= Number(subtitle1DurationRef.current.value);
-        const subtitle2Duration= Number(subtitle2DurationRef.current.value);
-        const subtitle3Duration= Number(subtitle3DurationRef.current.value);
-        const subtitle1Description= subtitle1DescriptionRef.current.value;
-        const subtitle2Description= subtitle2DescriptionRef.current.value;
-        const subtitle3Description= subtitle3DescriptionRef.current.value;
-
-        const data = {title, description, subject, price,
-            subtitles:[
-                {title: subtitle1Title, description: subtitle1Description, duration: subtitle1Duration },
-                {title: subtitle2Title, description: subtitle2Description, duration: subtitle2Duration },
-                {title: subtitle3Title, description: subtitle3Description, duration: subtitle3Duration }
-            ]};
+        const previewURL = previewRef.current.value;
+        const data = {title, description, subject, price, subtitles, previewURL};
         const link = APIURL + '/instructor/' + user.username + "/add-course";
         await axios.post(link, data);
         titleRef.current.value = "";
         subjectRef.current.value = "";
         priceRef.current.value = "";
         descriptionRef.current.value = "";
+        previewRef.current.value = "";
         subtitle1TitleRef.current.value = "";
-        subtitle2TitleRef.current.value = "";
-        subtitle3TitleRef.current.value = "";
         subtitle1DurationRef.current.value = "";
-        subtitle2DurationRef.current.value = "";
-        subtitle3DurationRef.current.value = "";
         subtitle1DescriptionRef.current.value = "";
-        subtitle2DescriptionRef.current.value = "";
-        subtitle3DescriptionRef.current.value = "";
+        subtitleVidRef.current.value = "";
+        subtitleVidDescRef.current.value = "";
+       
         alert("Course Added")
     }
-
+      subtitlesCount = "Subtitle " + Number(subtitles.length + 1);  // eslint-disable-next-line
     return (
     <Card className="mt-4 w-50 mx-auto my-4">
       <Card.Header><strong>Add Course Form</strong></Card.Header>
@@ -100,11 +99,14 @@ export default function AddCourse({user}) {
           style={{ height: '100px' }}
         />
       </FloatingLabel>
+      <FloatingLabel controlId="floatingSubject" label="Add a youtube URL of your preview video" className="mb-3">
+        <Form.Control ref={previewRef} type="preview" placeholder="PreviewURL" />
+      </FloatingLabel>
       <hr></hr>
       <Row>
         <Col>
-        <FloatingLabel controlId="floatingSubtitle1" label="Subtitle 1" className="mb-3">
-            <Form.Control ref={subtitle1TitleRef} type="subject" placeholder="Subtitle 1" />
+        <FloatingLabel controlId="floatingSubtitle1" label={subtitlesCount} className="mb-3">
+            <Form.Control ref={subtitle1TitleRef} type="subject" placeholder="Subtitle" />
         </FloatingLabel>
         </Col>
         <div className="h-100 col-md-4">
@@ -115,7 +117,7 @@ export default function AddCourse({user}) {
             </Col>
         </div>
       </Row>
-      <FloatingLabel controlId="floatingTextarea3" label="Subtitle 1 Description" className="mb-3">
+      <FloatingLabel controlId="floatingTextarea3" label="Subtitle Description" className="mb-3">
         <Form.Control
           ref={subtitle1DescriptionRef}
           as="textarea"
@@ -123,54 +125,22 @@ export default function AddCourse({user}) {
           style={{ height: '75px' }}
         />
       </FloatingLabel>
-      <hr></hr>
-      <Row>
-        <Col>
-        <FloatingLabel controlId="floatingSubtitle2" label="Subtitle 2" className="mb-3">
-            <Form.Control ref={subtitle2TitleRef} type="subject" placeholder="Subtitle 2" />
-        </FloatingLabel>
-        </Col>
-        <div className="h-100 col-md-4">
-            <Col>
-            <FloatingLabel controlId="floatingSubtitle2Duration" label="Duration in Hours" className="mb-3">
-            <Form.Control ref={subtitle2DurationRef} type="Subtitle2Duration" placeholder="Subtitle2Duration" />
-        </FloatingLabel>
-            </Col>
-        </div>
-      </Row>
-      <FloatingLabel controlId="floatingTextarea4" label="Subtitle 2 Description" className="mb-3">
+      <FloatingLabel controlId="floatingSubject" label="Add a youtube URL of your subtitle video" className="mb-3">
+        <Form.Control ref={subtitleVidRef} type="preview" placeholder="SubtitleURL" />
+      </FloatingLabel>
+      <FloatingLabel controlId="floatingTextarea3" label="Video Description" className="mb-3">
         <Form.Control
-          ref={subtitle2DescriptionRef}
+          ref={subtitleVidDescRef}
           as="textarea"
-          placeholder="Describe your subtitle here"
+          placeholder="Describe your video here"
           style={{ height: '75px' }}
         />
       </FloatingLabel>
       <hr></hr>
-      <Row>
-        <Col>
-        <FloatingLabel controlId="floatingSubtitle3" label="Subtitle 3" className="mb-3">
-            <Form.Control ref={subtitle3TitleRef} type="subject" placeholder="Subtitle 3" />
-        </FloatingLabel>
-        </Col>
-        <div className="h-100 col-md-4">
-            <Col>
-            <FloatingLabel controlId="floatingSubtitle3Duration" label="Duration in Hours" className="mb-3">
-            <Form.Control ref={subtitle3DurationRef} type="Subtitle3Duration" placeholder="Subtitle3Duration" />
-        </FloatingLabel>
-            </Col>
-        </div>
-      </Row>
-      <FloatingLabel controlId="floatingTextarea5" label="Subtitle 3 Description" className="mb-3">
-        <Form.Control
-          ref={subtitle3DescriptionRef}
-          as="textarea"
-          placeholder="Describe your subtitle here"
-          style={{ height: '75px' }}
-        />
-      </FloatingLabel>
+      
       </Card.Body>
-      <Button onClick={addCourse} className="w-25 mx-auto mb-3" variant="primary">Add Course</Button>
+     <Row><Button onClick={addSubtitle} className="w-25 mx-auto mb-3" variant="primary">Add Subtitle</Button>
+      <Button onClick={addCourse} className="w-25 mx-auto mb-3" variant="danger">Add Course</Button></Row> 
     </Card>
   )
 }

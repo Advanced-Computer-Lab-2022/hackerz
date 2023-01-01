@@ -7,10 +7,13 @@ const courseSchema = new Schema({
   rating: { type: Number },
   description: { type: String, required: true },
   instructorUsername: {type: String, required: true },
-  subject: { type: String, required: true },
+  subject: { type: String, required: true },  
   price: { type: Number, required: true },
-  subtitles : [{ title: { type: String }, description :{ type: String }, duration: { type: Number }}],
-  exercises: [{ id: { type: String }}]
+  subtitles : [{ title: { type: String }, description: { type: String }, duration: { type: Number }, videoURL: {type: String}, videoDescription: {type: String}}],
+  exercises: [{ id: { type: String }}],
+  counter: { type: Number, required: true},
+  previewURL: { type: String },
+  reviews: [{ username: {type: String} , review: {type: String} }]
 }, {
   timestamps: true,
 });

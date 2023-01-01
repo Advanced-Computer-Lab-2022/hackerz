@@ -64,6 +64,7 @@ router.route('/:user/add-course').post((req, res) => {
   const subject = req.body.subject;
   const price = req.body.price;
   const subtitles = req.body.subtitles;
+  const previewURL = req.body.previewURL;
 
   const newCourse = new Course({
     title,
@@ -73,7 +74,9 @@ router.route('/:user/add-course').post((req, res) => {
     subject,
     price,
     subtitles,
-    exercises: []
+    exercises: [],
+    counter: 0,
+    previewURL
   });
 
   newCourse.save()

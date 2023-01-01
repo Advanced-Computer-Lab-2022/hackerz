@@ -10,6 +10,7 @@ const userSchema = new Schema({
     trim: true,
     minlength: 3
   },
+  firstlog:{type: Boolean},
   userType: {
     type: String,
     // required: true,
@@ -40,7 +41,8 @@ const userSchema = new Schema({
   enrolledCourses: [{type:String}],
   exercises: [{ 
     exerciseID: { type: String } , score: { type: Number }, maxScore: { type: Number }
-    }]
+    }],
+  completedSubtitles: [{type: String}]
 },
  {
   timestamps: true,

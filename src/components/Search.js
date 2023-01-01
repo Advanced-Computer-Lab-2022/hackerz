@@ -6,11 +6,16 @@ const APIURL = "http://localhost:5000";
 
 function Search() {
   const [courses, setCourses] = useState([]);
+  const [popular, setPopular] = React.useState(false);
   const searchRef = useRef();
   const minPriceRef = useRef();
   const maxPriceRef = useRef();
   const subjectRef = useRef();
   const ratingRef = useRef();
+
+  const handlePopular = () => {
+    setPopular(!popular);
+  };
   
   const searchCourses = async () => {
     const query = searchRef.current.value;
@@ -19,9 +24,11 @@ function Search() {
     const subject = subjectRef.current.value;
     const rating = ratingRef.current.value;
     const country = my_country;
-    const params = { query, minPrice, maxPrice, subject, rating, country }
+    const params = { query, minPrice, maxPrice, subject, rating, country, popular }
+    console.log(popular)
     const response = await axios.get(APIURL + '/courses', { params })
     const data = response.data;
+    
     setCourses(data);
   }
  
@@ -33,7 +40,8 @@ function Search() {
   return (
     <div className="m-3">
         <input className="m-1" ref={searchRef} placeholder="Search" type="search"/>
-        <button onClick={searchCourses}>Search</button> <br/><br/>
+        <button onClick={searchCourses}>Search</button> &nbsp;&nbsp;
+        <div className="mx-1"><input checked={popular} onChange={handlePopular} type="checkbox" /> Sort by most popular</div><br/>
         <input className="m-1" ref={minPriceRef} placeholder="Minimum Price" type="number"/>
         <input className="m-1" ref={maxPriceRef} placeholder="Maxmimum Price" type="number"/>
         <input className="m-1" ref={subjectRef} placeholder="Subject" type="text"/>

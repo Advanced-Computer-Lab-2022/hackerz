@@ -12,7 +12,8 @@ router.route('/').get(async (req, res) => {
     const maxPrice = req.query.maxPrice ? parseInt(req.query.maxPrice) : undefined;
     const rating = req.query.rating ? parseInt(req.query.rating) : undefined;
     const subject = req.query.subject;
-    var docs; var newDocs; var filteredDocs;
+    const sortByPopular = req.query.popular;
+        var docs; var newDocs; var filteredDocs;
 
     if (searchString) {
         docs = await Course.find()
@@ -29,7 +30,7 @@ router.route('/').get(async (req, res) => {
 
     var country = req.query.country;
     for (var doc in docs) {
-        docs[doc].price = (docs[doc].price / countries[country].ratio).toFixed(2);
+        docs[doc].price = (docs[doc].price / countries[country]?.ratio).toFixed(2);
     }
 
     if (subject && rating) newDocs = docs.filter(course => course.subject === subject && course.rating === rating); //filtering
@@ -42,6 +43,7 @@ router.route('/').get(async (req, res) => {
     else if (maxPrice) filteredDocs = newDocs.filter(course => course.price <= maxPrice);
     else filteredDocs = newDocs;
 
+    if (sortByPopular === "true") filteredDocs.sort((a, b) => parseFloat(b.counter) - parseFloat(a.counter));
     res.json(filteredDocs);
 });
 
@@ -84,5 +86,17 @@ router.route('/:course/add-exercise').post( async (req, res) => {
 router.route('/:id').put(async(req, res) => {
     await Course.updateOne({_id: req.params.id}, {rating : req.query.rating})
 });
+
+router.route('/:course/:subtitle/get-subtitle').get( async (req, res) => {
+    const course = req.params.course;
+    const subtitle = req.params.subtitle;
+    const data = await Course.findOne({_id: course});
+    //const currentUser = await User.findOne({username: user});
+    var response;
+    for(const sub in data.subtitles ){
+        if (subtitle == data.subtitles[sub]._id) response = data.subtitles[sub]
+    }
+    res.json(response);
+  });
 
 module.exports = router;
