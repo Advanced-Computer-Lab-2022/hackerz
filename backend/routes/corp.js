@@ -1,5 +1,12 @@
 const router = require('express').Router();
 let Course = require('../models/course.model');
+const cookieParser = require('cookie-parser');
+//app.use(cookieParser());
+const nodemailer= require('nodemailer');
+let { requireAuthadmin ,requireAuthinstructor, requireAuthindividualTrainee , requireAuthcorpTrainee } = require('../Middleware/Autho')
+//router.use(
+  //  requireAuthcorpTrainee
+  //);
 let CorpRequest = require('../models/corpRequests.model');
 const projection = {__v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0, price: 0};
 
@@ -37,7 +44,38 @@ router.route('/courses/:id').get((req, res) => {
       .then(course => res.json(course))
       .catch(err => res.status(500).json('Error: ' + err));
 });
-
+router.route('/receive-certificate').post(async (req,res)=>{
+    const email= req.body.useremail;
+    
+    const transporter = nodemailer.createTransport({
+        service: 'hotmail',
+        auth: {
+          user: 'hackerz2001@outlook.com',
+          pass: 'hackerzSalma'
+        }
+      }); 
+    transporter.sendMail({
+        from:'hackerz2001@outlook.com',
+        to: email,
+        subject: 'Certificate of completance',
+        text: 'Dear Candidate,You will find your certificate attached in this e-mail',
+        attachments: [{
+          filename: 'Certifcate.pdf',
+          path: 'C:\Users\Lenovo\OneDrive\Desktop\project_marwan',
+          contentType: 'application/pdf'
+        }],
+        function(err, info) {
+          if (err) {
+            console.error(err);
+          } else {
+            console.log(info);
+          }
+        }
+      });
+})
+router.route('/download-certificate').get(async(req,res)=>{
+    res.download("C:\Users\Lenovo\OneDrive\Desktop\project_marwan");
+ 
 router.route('/:user/:id/requestAccess').post(async(req, res) => {
     const user = req.params.user;
     const course = req.params.id;
@@ -53,4 +91,27 @@ router.route('/:user/:id/requestAccess').post(async(req, res) => {
     }
 });
 
+})
 module.exports = router;
+/*  const transporter = nodemailer.createTransport({
+                  service: 'hotmail',
+                  auth: {
+                    user: 'hackerz2001@outlook.com',
+                    pass: 'hackerzSalma'
+                  }
+                }); 
+                var mailOptions = {
+                  from: 'hackerz2001@outlook.com',
+                  to: useremail,
+                  subject: 'Reset Password Link',
+                  text: link
+                };  
+                transporter.sendMail(mailOptions, function(error, info){
+                  if (error) {
+                    console.log(error);
+                    res.json(error);
+                  } else {
+                    console.log('Email sent: ' + info.response);
+                    res.json('Email sent: ' + info.response);
+                  }
+                });  */ 

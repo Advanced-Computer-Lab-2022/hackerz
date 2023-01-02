@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
-
+axios.defaults.withCredentials = true;
 export default function AddExercise() {
   const {id} = useParams();
   const titleRef = useRef();

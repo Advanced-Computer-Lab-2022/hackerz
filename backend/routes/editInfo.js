@@ -3,6 +3,7 @@ let User = require('../models/user.model');
 const jwt = require ('jsonwebtoken');
 const JWT_SECRET='Secret';
 const nodemailer= require('nodemailer');
+const bcrypt= require('bcrypt');
 
 //const projection = {__v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0, username:0,userType:0,   password:0,country:0};
 const projection = {_id:1};
@@ -94,11 +95,45 @@ router.route('/reset-password/:id/:token').post(async(req,res)=>{
 
   }
   else{
-    var doc = await User.findOneAndUpdate({_id:user_id}, {password:new_password}, {
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(new_password, salt);
+    var doc = await User.findOneAndUpdate({_id:user_id}, {password:hashedPassword}, {
       new: true
     });
     res.json("Password updated successfully");
   }
 
 });
+router.route('/forget-password').post (async (req,res) =>{
+  var useremail = req.body.params.usermail;
+  var password = req.body.params.oldPass;
+  var newpassword= req.body.params.Pass;
+  var ConfirmNewPassword = req.body.params.confirmPass;
+  
+  User.exists({useremail:useremail , password:password}, async function (err, doc) {
+    if (err){
+      console.log(err);
+    }
+    if (doc){ 
+      console.log(newpassword)
+      if(ConfirmNewPassword===newpassword){
+        const salt = await bcrypt.genSalt();
+        console.log(salt);
+        const hashedPassword = await bcrypt.hash(newpassword, salt);
+      var doc = await User.findOneAndUpdate({useremail:useremail}, {password:hashedPassword}, {
+        new: true
+      });
+    
+      
+      res.json("Password updated successfully");}
+      else{
+        res.json("Passwordsdo not match ");
+      }
+    }
+    else{
+      res.json("Invalid credetinals ");
+    }
+})
+});
+
  module.exports = router;

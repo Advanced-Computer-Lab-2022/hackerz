@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import { NavLink } from 'react-router-dom';
 import countries from '../countries.json';
 import { my_country } from './Country';
-
+//axios.defaults.withCredentials = true;
 export default function Course(props) {
   const course = props.course;
   const corp = props.corp;

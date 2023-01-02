@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react';
 import CoursesList from './CoursesList';
 const axios = require('axios').default;
+axios.defaults.withCredentials = true;
 const APIURL = "http://localhost:5000";
 function EditBiography({user}) {
     const username = user.username;

@@ -20,13 +20,21 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import CountriesList from './components/CountriesList';
 import Home from './components/Home';
+import Register from './components/Register';
+import Login from './components/Login';
 import CreditCardInfo from './components/CreditCardInfo';
 import CheckoutIndex from './components/CheckoutIndex';
 import Subtitle from './components/Subtitle';
 import countries from './countries.json';
+import CorpAuth from './components/CorpAuth';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import InstructorsList from './components/InstructorsList';
+import AdminAuth from './components/AdminAuth';
+import InstructorAuth from './components/InstructorAuth';
+import ReceiveCertificate from './components/ReceiveCertificate';
+import ChangePassword from './components/ChangePassword';
+//import Register from './components/Register';
 
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
@@ -94,19 +102,14 @@ function App() {
         <Routes>  
           <Route path='/'/>
           <Route path='/search' element={<Search/>}/>
-          <Route path='/corp' element={<CorpCourses/>}/>
-          <Route path='/instructor' element={<InstructorsList/>}/>
-          { user?.userType === "instructor" ? <>
-          <Route path='/instructor/my-courses' element={<InstructorCourses user={user}/>}/>
+          <Route path='/course/:id' element={<CourseView user={user}/>}/>
+          <Route path='/corp' element={<CorpAuth/>}/>
+          <Route path='/instructor/my-courses' element={<InstructorAuth user={user}/>}/>
           <Route path='/instructor/add-course' element={<AddCourse user={user}/>}/>
           <Route path='/instructor/editbiography' element={<EditBiography user={user}/>}/>
-          <Route path='/instructor/editusermail' element={<EditMail user={user}/>}/></> 
-          : <Route path='/instructor/:x' element={<h1>UNAUTHORIZED ACCESS</h1>}/>}
-         
-          {user?.userType === "admin" ? <Route path='/admin' element={<AdminPanel/>}/> 
-          : <Route path='/admin' element={<h1>UNAUTHORIZED ACCESS</h1>}/>}
-
-          <Route path='/course/:id' element={<CourseView user={user}/>}/>
+          <Route path='/instructor/editusermail' element={<EditMail user={user}/>}/>
+          <Route path='/admin' element={<AdminAuth/>}/>
+          <Route path='/exercise/:id' element={<ExerciseView user={user}/>}/>
           <Route path='/course/:id/exercises' element={<ExerciseList user={user}/>}/>
           <Route path='/course/:id/add-exercise' element={<AddExercise/>}/>
           <Route path='/course/:id/pay' element={<CreditCardInfo user={user}/>}/>
@@ -114,7 +117,14 @@ function App() {
           <Route path='/course/:id/:subtitleID/' element={<Subtitle user={user}/>}/>
           <Route path='/exercise/:id' element={<ExerciseView user={user}/>}/>
           <Route path='/editInfo' element={<ResetPassword/>}/>
+          <Route path='/editInfo' element={<ResetPassword/>}/>
           <Route path='/reset-password/:userid/:token' element={<ValidateMail/>}/>
+          <Route path='/home/register' element={<Register/>}/>
+          <Route path='/home' element={<Login/>}/>
+          <Route path='/certificate' element={<ReceiveCertificate/>}/>
+          <Route path='/editInfo/forget-password' element={<ChangePassword/>}/>
+      
+
           <Route path='/enrolledCourses' element={<MyCourses user={user}/>}/>
         </Routes>
       </BrowserRouter>

@@ -7,7 +7,7 @@ import Card from 'react-bootstrap/Card';
 
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
-
+axios.defaults.withCredentials = true;
 export default function ExerciseList({user}) {
   //use params for course id
   let {id} = useParams();

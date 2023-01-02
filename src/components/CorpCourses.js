@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import CoursesList from './CoursesList';
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
-
+axios.defaults.withCredentials = true;
 function CorpCourses() {
   const [courses, setCourses] = useState([]);
   const [popular, setPopular] = React.useState(false);

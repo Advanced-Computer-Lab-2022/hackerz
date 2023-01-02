@@ -3,7 +3,7 @@ import Instructor from './Instructor'
 import { Row } from 'react-bootstrap';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-
+axios.defaults.withCredentials = true;
 const APIURL = 'http://localhost:5000';
 
 export default function InstructorsList(props) {
