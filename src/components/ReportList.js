@@ -10,7 +10,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import {useRef} from 'react'
 import ReportView from './ReportView';
-const APIURL = "http://localhost:8000";
+const APIURL = "http://localhost:5000";
 const axios = require('axios').default;
 
 

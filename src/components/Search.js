@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import CoursesList from './CoursesList';
 import { my_country } from './Country';
 const axios = require('axios').default;
-const APIURL = "http://localhost:8000";
+const APIURL = "http://localhost:5000";
 
 function Search() {
   const [courses, setCourses] = useState([]);
