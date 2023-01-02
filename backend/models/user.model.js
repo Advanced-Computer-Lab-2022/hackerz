@@ -11,9 +11,6 @@ const userSchema = new Schema({
     minlength: 3
   },
   firstlog:{type: Boolean},
-  firstlog:{
-    type:Boolean
-  },
   userType: {
     type: String,
     // required: true,

@@ -7,13 +7,13 @@ const { requireAuthadmin ,requireAuthinstructor, requireAuthindividualTrainee , 
   //requireAuthinstructor
   //);
 //inst , trainees
-router.route('/:id').get(requireAuthInstandtrainee, async (req, res) => {
+router.route('/:id').get( async (req, res) => {
   const id = req.params.id;
   const response = await Exercise.findOne({_id: id});
   res.json(response);
 });
 
-router.route('/:exercise/add-question').post(requireAuthinstructor, async (req, res) => {
+router.route('/:exercise/add-question').post(async (req, res) => {
   const exercise = req.params.exercise;
   const questionText = req.body.text;
   const answer1 = req.body.answer1;

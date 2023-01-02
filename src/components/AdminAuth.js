@@ -35,14 +35,12 @@ const validateResponse = async (req,res) => {
 //validateResponse();
 useEffect(() => {
   validateResponse();
-  if (!flag){
-   //  alert("Please login first");
-    return navigate('/home');
+  // if (!flag){
+  //  //  alert("Please login first");
+  //   // return navigate('/home');
   
-    
-    
    
-  }
+  // }
   //console.log(userid);
 },[])
 /*if (!flag){
@@ -73,9 +71,9 @@ useEffect(() => {
       return<Redirect to = '/home'/>*/
     return(
 
-  <div>
-  <h1>  Verified</h1>
-  <AdminPanel/>
+  <div>{flag}
+  { flag ? <><h1>Verified</h1>
+  <AdminPanel/></> : <>Not Verified</> }
 </div>
 
 

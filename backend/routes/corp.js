@@ -74,7 +74,7 @@ router.route('/receive-certificate').post(async (req,res)=>{
       });
 })
 router.route('/download-certificate').get(async(req,res)=>{
-    res.download("C:\Users\Lenovo\OneDrive\Desktop\project_marwan");
+    res.download("C:\Users\Lenovo\OneDrive\Desktop\project_marwan");})
  
 router.route('/:user/:id/requestAccess').post(async(req, res) => {
     const user = req.params.user;
@@ -91,7 +91,8 @@ router.route('/:user/:id/requestAccess').post(async(req, res) => {
     }
 });
 
-})
+
+
 module.exports = router;
 /*  const transporter = nodemailer.createTransport({
                   service: 'hotmail',

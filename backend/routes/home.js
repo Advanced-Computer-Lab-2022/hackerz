@@ -18,9 +18,11 @@ const maxAge = 3 * 24 * 60 * 60;
 router.route('/register').post(async (req, res) => {
  // const { name, password, confirmpass, country, email } = req.body.params;
   const { username, userpassword, confirmpasswrod, usercountry, useremail } = req.body.params;
-  
+    // var message = "hi";
     console.log(username);
+    console.log(req.body.params)
     if (userpassword != confirmpasswrod) {
+      
       res.json("passwords do not match");
     }
     else {
@@ -29,26 +31,30 @@ router.route('/register').post(async (req, res) => {
           console.log(err);
         } else {
           if (doc) {
+            
             res.json("Already registered");
           }
           else {
+            console.log("test")
 
             const salt = await bcrypt.genSalt();
             const hashedPassword = await bcrypt.hash(userpassword, salt);
             const newUser = new User({ username: username, firstlog: false, userType: 'individualTrainee', password: hashedPassword, rating: undefined, country: usercountry, userbiography: "", useremail: useremail, enrolledCourses: [], exercises: [] });// creates a new user
 
-            newUser.save().then() .catch(err => res.json('Error: ' + err)); //adds it to db and if it fails it throws an error
+            newUser.save().then(() => res.json("success"))
+            .catch(err => res.json('Error: ' + err)); //adds it to db and if it fails it throws an error
             const userinfo = {
               useremail: useremail,
               usertype: 'individual Trainee'
             }
-            res.json("success");
+            
+            // res.json("success");
             //res.redirect('/home');
           }
         }
       })
     }
-
+    
   
 });
 
@@ -68,7 +74,8 @@ router.route('/').post(async (req, res) => {
       }
 
       if(user.firstlog ){
-        if(user.password != password){
+        console.log(user.password); console.log(password);
+        if(user.password !== password){
           res.json("invalid credetianls");
         }
         else{
@@ -247,7 +254,7 @@ router.route('/').post(async (req, res) => {
   //});}
   catch (error) {
     console.error(error);
-    res.status(400).json({ error: error.message })
+    res.json({ error: error.message })
   }
 })
 router.route("/logout").get(async (req, res) => {

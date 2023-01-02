@@ -26,8 +26,7 @@ const handleSubmit = async (event) => {
    
 
     const params = { useremail, password }
-    const response = await axios.post(APIURL + '/home', { params },{   withCredentials: true
-    })
+    const response = await axios.post(APIURL + '/home', { params },{ withCredentials: true })
     alert(response.data);
     if(response.data== "first log"){
       return navigate('/editInfo/forget-password');
@@ -42,6 +41,9 @@ const handleSubmit = async (event) => {
     else if (response.data=='corpTrainee' ){
       return navigate('/corp');
     }
+    else if (response.data=='individualTrainee' ){
+      return navigate('/search');
+    }
    // console.log(response.data);
     //alert( useremail +"" + password) ;
   }
@@ -49,8 +51,7 @@ const handleSubmit = async (event) => {
   return (
     
         <>
-        <div>Please Log in first to be authorized user
-        </div>
+        <div>Please Log in first to be authorized user</div>
           <form onSubmit= {handleSubmit}>
            
             

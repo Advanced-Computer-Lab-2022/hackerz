@@ -68,7 +68,7 @@ router.route('/:id').get((req, res) => {
     res.json(response);
   });
 
-router.route('/:course/add-exercise').post( requireAuthinstructor,async (req, res) => {
+router.route('/:course/add-exercise').post(async (req, res) => {
     const title = req.body.title;
     const questions = req.body.questions;
     const course = req.params.course;

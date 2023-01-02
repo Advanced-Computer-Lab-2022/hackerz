@@ -20,7 +20,7 @@ router.route('/receive-certificate').post(async (req,res)=>{
         text: 'Dear Candidate,You will find your certificate attached in this e-mail',
         attachments: [{
           filename: 'Certifcate.pdf',
-          path: 'C:/Users/Lenovo/OneDrive/Desktop/project_marwan/Certificate.pdf',
+          path: 'C:/Users/Abdullah/Desktop/gitProjects/hackerz/Certificate.pdf',
           contentType: 'application/pdf'
         }],
         function(err, info) {

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 //import ReactDOM from 'react-dom/client';
 const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
+axios.defaults.withCredentials = true;
+
 function Register(){
     const usernameref= useRef();
     const useremailref = useRef();
@@ -22,6 +24,7 @@ const handleSubmit = async (event) => {
     const usercountry = countryref.current.value;
 
     const params = { username, userpassword, confirmpasswrod, usercountry, useremail }
+    console.log(params)
     const response = await axios.post(APIURL + '/home/register', { params })
     alert(response.data);
     return navigate('/home');
@@ -30,7 +33,7 @@ const handleSubmit = async (event) => {
   return (
     
         <>
-          <form onSubmit= {handleSubmit}>
+          <form className="m-3" onSubmit= {handleSubmit}>
             <div> 
             <label>Please Enter your name</label>
             <input className="m-1" ref={usernameref} placeholder="User Name" type="text" required/>
@@ -51,6 +54,9 @@ const handleSubmit = async (event) => {
             <label>Please Enter your country</label>
             <input className="m-1" ref={countryref} placeholder="user country" type="text"/>
             </div>
+            <a href="https://www.termsandcondiitionssample.com/live.php?token=joM3Jl3ElJs5nefecx0QsgEoxLQwaCVU">
+              Signing up to this website means you have read and accepted the following terms and conditions
+            </a><br/>
             <input type="submit" />
           </form>
         </>

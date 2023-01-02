@@ -6,10 +6,10 @@ let Course = require('../models/course.model');
 let CorpRequest = require('../models/corpRequests.model');
 const stripe = require('stripe')('sk_test_51MG618CkQfuK4spKVdeLx28yfR0NiDMESliP9knQuLke9NTavPIzWUJIKyLjoi8239EYHYAR0M99P38WbCXXMwWG00Vx7ZRKqq');
 
-const { requireAuthadmin ,requireAuthinstructor, requireAuthindividualTrainee , requireAuthcorpTrainee }= require('../Middleware/Autho')
-router.use(
-    requireAuthadmin
-  );
+// const { requireAuthadmin ,requireAuthinstructor, requireAuthindividualTrainee , requireAuthcorpTrainee }= require('../Middleware/Autho')
+// router.use(
+//     requireAuthadmin
+//   );
 
 router.route('/').get((req, res) => {
   User.find()
@@ -29,7 +29,7 @@ router.route('/get-user/:username').get((req, res) => {
     .catch(err => res.status(500).json('Error: ' + err));
 });
 
-router.route('/addadmin').post( requireAuthadmin,async( req,res) => {// addadmin?
+router.route('/addadmin').post(  async( req,res) => {// addadmin?
   var count = await User.countDocuments({userType: "admin"});
   var username = "admin"+count++;// takes username from the body
   var email = username + "@gmail.com"
@@ -42,10 +42,10 @@ router.route('/addadmin').post( requireAuthadmin,async( req,res) => {// addadmin
 });
 
 //add another instructor
-router.route('/addinst').post(requireAuthadmin, (req, res) => {
+router.route('/addinst').post( (req, res) => {
   const username = req.body.username;// takes username from the body
   const password = req.body.password;
-  const newUser = new User({username,userType:'instructor',firstlog: true, useremail:"beedoz377@gmail.com",userbiography:"" ,password, country:"Egypt"});// creates a new user
+  const newUser = new User({username,userType:'instructor',firstlog: true, useremail:"random222@gmail.com",userbiography:"" ,password, country:"Egypt"});// creates a new user
 
   newUser.save() 
     .then(() => res.json('User added!'))
@@ -53,10 +53,10 @@ router.route('/addinst').post(requireAuthadmin, (req, res) => {
 });
 
 //add a corporate tranees
-router.route('/addcorp').post(requireAuthadmin,(req, res) => {
+router.route('/addcorp').post((req, res) => {
   const username = req.body.username;// takes username from the body
   const password = req.body.password;
-  const newUser = new User({username,firstlog: true,userType:'corpTrainee',useremail:"test1@hotmail.com", password, rating: 0, country:"Egypt"});// creates a new user
+  const newUser = new User({username,firstlog: true,userType:'corpTrainee',useremail:"beedoz377@gmail.com", password, rating: 0, country:"Egypt"});// creates a new user
 
   newUser.save() 
     .then(() => res.json('User added!'))
@@ -65,7 +65,7 @@ router.route('/addcorp').post(requireAuthadmin,(req, res) => {
 router.route('/addindiv').post((req, res) => {
   const username = req.body.username;// takes username from the body
   const password = req.body.password;
-  const newUser = new User({username,firstlog: true,userType:'individualTrainee',useremail:"random1@hotmail.com", password, rating: 0, country:"Egypt"});// creates a new user
+  const newUser = new User({username,firstlog: true,userType:'individualTrainee',useremail:"random123@hotmail.com", password, rating: 0, country:"Egypt"});// creates a new user
 
   newUser.save() 
     .then(() => res.json('User added!'))

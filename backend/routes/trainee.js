@@ -14,7 +14,7 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(500).json('Error: ' + err));
 });
 
-router.route('/:user/:course/enroll').post(requireAuthindividualTrainee, async (req, res) => {
+router.route('/:user/:course/enroll').post( async (req, res) => {
     const user = req.params.user;
     const course = req.params.course;
     const currentUser = await User.findOne({username: user});
@@ -46,7 +46,7 @@ router.route('/:user/myCourses').get( async (req,res) => {
     if(currentUser) res.json(courses);
     else res.json(false);
 });
-router.route('/:user/:exercise/save-score').post(requireAuthindividualTrainee, async (req, res) => {
+router.route('/:user/:exercise/save-score').post( async (req, res) => {
     
     const user = req.params.user;
     const id = req.params.exercise;
@@ -76,35 +76,35 @@ router.route('/:user/:exercise/save-score').post(requireAuthindividualTrainee, a
 
 });
 
-router.route('/receive-certificate').post(async (req,res)=>{
-    const email= req.body.useremail;
+// router.route('/receive-certificate').post(async (req,res)=>{
+//     const email= req.body.useremail;
     
-    const transporter = nodemailer.createTransport({
-        service: 'hotmail',
-        auth: {
-          user: 'hackerz2001@outlook.com',
-          pass: 'hackerzSalma'
-        }
-      }); 
-    transporter.sendMail({
-        from:'hackerz2001@outlook.com',
-        to: email,
-        subject: 'Certificate of completance',
-        text: 'Dear Candidate,You will find your certificate attached in this e-mail',
-        attachments: [{
-          filename: 'Certifcate.pdf',
-          path: 'C:\Users\Lenovo\OneDrive\Desktop\project_marwan',
-          contentType: 'application/pdf'
-        }],
-        function(err, info) {
-          if (err) {
-            console.error(err);
-          } else {
-            console.log(info);
-          }
-        }
-      });
-})
+//     const transporter = nodemailer.createTransport({
+//         service: 'hotmail',
+//         auth: {
+//           user: 'hackerz2001@outlook.com',
+//           pass: 'hackerzSalma'
+//         }
+//       }); 
+//     transporter.sendMail({
+//         from:'hackerz2001@outlook.com',
+//         to: email,
+//         subject: 'Certificate of completance',
+//         text: 'Dear Candidate,You will find your certificate attached in this e-mail',
+//         attachments: [{
+//           filename: 'Certifcate.pdf',
+//           path: 'C:\Users\Lenovo\OneDrive\Desktop\project_marwan',
+//           contentType: 'application/pdf'
+//         }],
+//         function(err, info) {
+//           if (err) {
+//             console.error(err);
+//           } else {
+//             console.log(info);
+//           }
+//         }
+//       });
+// })
 router.route('/download-certificate').get(async(req,res)=>{
     res.download("C:\Users\Lenovo\OneDrive\Desktop\project_marwan");
  

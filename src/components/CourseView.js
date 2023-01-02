@@ -1,5 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react';
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, useNavigate} from "react-router-dom";
 import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
@@ -13,6 +13,7 @@ const axios = require('axios').default;
 const APIURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
 export default function CourseView({user}) {
+  let navigate = useNavigate();
   const reviewRef = useRef();
     const [course, setCourse] = useState([]);
     const [enrolled, setEnrolled] = useState(false);
@@ -49,6 +50,9 @@ export default function CourseView({user}) {
       setProgress(Number(response.data))
       console.log("progress:", response.data)
     }
+    const getCertificate =  () => {
+      navigate("/certificate")
+    }
     
     useEffect(() => {
       checkEnrolled();
@@ -76,6 +80,9 @@ export default function CourseView({user}) {
       <div style={{float: 'right'}}> {enrolled && user.username.length > 0? <h3>Progress Made: {progress}%</h3> :<></>}</div></Card.Header>
       <Card.Body>
       <div style={{float: 'right'}}>
+        { enrolled && progress === 100 ? 
+          <Button onClick={getCertificate} variant="outline-success">Get Certificate</Button>
+        : <></>}
         { enrolled || user.username === course.instructorUsername ? 
         <NavLink to={"exercises"} className="mb-2">
           <Button variant="outline-primary">View Exercises</Button>
