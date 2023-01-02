@@ -14,6 +14,7 @@ import CountriesList from './components/CountriesList';
 import countries from './countries.json';
 import Report from './components/Report';
 import ReportList from './components/ReportList';
+import Home from './components/Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
@@ -56,7 +57,7 @@ function App() {
     </Navbar>
     
         <Routes>
-          <Route path='/'/>
+          <Route path='/' element={<Home/>}/>
           <Route path='/search' element={<Search/>}/>
           <Route path='/course/:id' element={<CourseView/>}/>
           <Route path='/corp' element={<CorpCourses/>}/>

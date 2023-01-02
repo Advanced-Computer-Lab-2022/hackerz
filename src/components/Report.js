@@ -30,6 +30,8 @@ const Report =({ user })=>{
                 }
             }
         }
+
+        console.log(type);
     } 
 
     const addReport = async () => {
@@ -37,13 +39,12 @@ const Report =({ user })=>{
 
         const data = {type, description};
 
-        // add userid before course id
-        // const link = APIURL + '/report/6352b60ded327d9c221abcc6/salmaa';
         const link = APIURL + '/report/' + id + '/' + user.username;
         console.log(user.username);
         await axios.post(link, data);
 
         descriptionRef.current.value = "";
+        console.log(data)
 
         alert("Report Submitted")
 

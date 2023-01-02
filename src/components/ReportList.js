@@ -2,25 +2,28 @@ import React from 'react'
 import Report from './Report';
 import {Row} from 'react-bootstrap'; 
 import { useState } from "react"
+import { useEffect } from "react"
 import Card from 'react-bootstrap/Card';
 import { useParams } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
-import React, {useRef} from 'react'
+import {useRef} from 'react'
+import ReportView from './ReportView';
 const APIURL = "http://localhost:8000";
 const axios = require('axios').default;
 
 
 
-export default function ReportList(props) {
-    const reports = props.reports;
+export default function ReportList({ user }) {
+    const [reports, setReports] = useState([]);
 
     const listReports = async () => {
-        const params = {}
-        const response = await axios.get(APIURL + '/courses', { params })
+        const response = await axios.get(APIURL + '/report/' + user.username)
         const data = response.data;
-        setCourses(data);
+        setReports(data);
+        // console.log(reports);
+        // console.log(data[0]._id)
     }
 
     useEffect(() => {
@@ -28,12 +31,22 @@ export default function ReportList(props) {
     },[])
     
     return (
-        <div>  
-        <Row className="d-flex mx-auto">
-        { reports.map(report => {
-            return <Report key={report._id} report={reports}/>
-        }) } 
-        </Row>
-        </div>    
+        <>
+            {
+                reports?.length > 0 ? (
+                <div>
+                    <Row className="d-flex mx-auto">
+                        { reports.map(report => {
+                             return <ReportView key={report._id} report={reports} />
+                        }) }
+                    </Row>
+                </div>
+                ) : (
+                <div>
+                    <h2>No Reports Pending.</h2>
+                </div>
+                )
+            }
+        </>    
   )
 }

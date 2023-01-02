@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const projection = {__v: 0, createdAt: 0, updatedAt: 0, dateAdded: 0};
 let Report = require('../models/report.model');
+let Course = require('../models/course.model');
 
 router.route('/:coursetitle/:user').post( async (req, res) => {
     const user = req.params.user; //get from props
@@ -17,9 +18,10 @@ router.route('/:coursetitle/:user').post( async (req, res) => {
     // if the user didn't fill all fields
     console.log(req.body)
     if(!req.body.type || !req.body.description){
-      res.status(400)
-      throw new Error('Please fill all fields.')
+      res.status(400).json('Please Fill all fields')
+      // throw new Error('Please fill all fields.')
     }
+    console.log(req.body.type)
   
     // Add new report in the database
     const report = await Report.create({
@@ -34,13 +36,12 @@ router.route('/:coursetitle/:user').post( async (req, res) => {
 });
 
 router.route('/:user').get( async (req, res) => {
-    console.log(req.params.user)
+    
     const reports = await Report.find({ 'user': req.params.user }).select(projection)
-          .then(report => res.json(report))
+          .then(report => {
+            res.json(report);
+          })
           .catch(err => res.status(500).json('Error: ' + err));
 
-    console.log("Rawannn")
-    console.log(res)
-    console.log(reports.length)
 });
  module.exports = router;
