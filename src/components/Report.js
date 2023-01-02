@@ -1,56 +1,52 @@
+import { useState } from "react"
 import Card from 'react-bootstrap/Card';
+import { useParams } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import React, {useRef} from 'react'
+const APIURL = "http://localhost:8000";
+const axios = require('axios').default;
 
-const Report =()=>{
+
+const Report =({ user })=>{
     // /report
     // /report/:user/:coursetitle
 
+    const [type, setType] = useState("");
+
+    let {id} = useParams();
+
     const descriptionRef = useRef();
 
-    const addReport = async () => {
-        // const type = titleRef.current.value;
-        const description = description.current.value;
-    }
-    const addCourse = async () => {
-        const title = titleRef.current.value;
-        const subject = subjectRef.current.value;
-        const price = Number(priceRef.current.value);
-        const description = descriptionRef.current.value;
-        const subtitle1Title = subtitle1TitleRef.current.value;
-        const subtitle2Title = subtitle2TitleRef.current.value;
-        const subtitle3Title = subtitle3TitleRef.current.value;
-        const subtitle1Duration= Number(subtitle1DurationRef.current.value);
-        const subtitle2Duration= Number(subtitle2DurationRef.current.value);
-        const subtitle3Duration= Number(subtitle3DurationRef.current.value);
-        const subtitle1Description= subtitle1DescriptionRef.current.value;
-        const subtitle2Description= subtitle2DescriptionRef.current.value;
-        const subtitle3Description= subtitle3DescriptionRef.current.value;
+    const onOptionChange = e => {
+        var ele = document.getElementsByTagName('input')
+        for(var i = 0; i < ele.length; i++) {
+                  
+            if(ele[i].type==="radio") {
+              
+                if(ele[i].checked){
+                    setType(ele[i].value)
+                }
+            }
+        }
+    } 
 
-        const data = {title, description, subject, price,
-            subtitles:[
-                {title: subtitle1Title, description: subtitle1Description, duration: subtitle1Duration },
-                {title: subtitle2Title, description: subtitle2Description, duration: subtitle2Duration },
-                {title: subtitle3Title, description: subtitle3Description, duration: subtitle3Duration }
-            ]};
-        const link = APIURL + '/instructor/' + user.username + "/add-course";
+    const addReport = async () => {
+        const description = descriptionRef.current.value;
+
+        const data = {type, description};
+
+        // add userid before course id
+        // const link = APIURL + '/report/6352b60ded327d9c221abcc6/salmaa';
+        const link = APIURL + '/report/' + id + '/' + user.username;
+        console.log(user.username);
         await axios.post(link, data);
-        titleRef.current.value = "";
-        subjectRef.current.value = "";
-        priceRef.current.value = "";
+
         descriptionRef.current.value = "";
-        subtitle1TitleRef.current.value = "";
-        subtitle2TitleRef.current.value = "";
-        subtitle3TitleRef.current.value = "";
-        subtitle1DurationRef.current.value = "";
-        subtitle2DurationRef.current.value = "";
-        subtitle3DurationRef.current.value = "";
-        subtitle1DescriptionRef.current.value = "";
-        subtitle2DescriptionRef.current.value = "";
-        subtitle3DescriptionRef.current.value = "";
-        alert("Course Added")
+
+        alert("Report Submitted")
+
     }
 
     return(
@@ -58,26 +54,37 @@ const Report =()=>{
             <Card.Header><strong>Report a Problem</strong></Card.Header>
             <Card.Body>
                 <p>Please select the type of problem you have.</p>
+
                 <Form.Check
                 inline
                 label="Technical"
+                value="Technical"
                 name="group1"
                 type='radio'
-                id={`inline-$'radio'-2`}
+                id={`tech`}
+                onChange={onOptionChange}
+                checked={type==="Technical"}
                 />
+
                 <Form.Check
                     inline
                     label="Financial"
+                    value="Financial"
                     name="group1"
                     type='radio'
-                    id={`inline-$'radio'-2`}
+                    id={`fin`}
+                    onChange={onOptionChange}
+                    checked={type==="Financial"}
                 />
                 <Form.Check
                     inline
                     label="Other"
+                    value="Other"
                     name="group1"
                     type='radio'
-                    id={`inline-$'radio'-2`}
+                    id={`oth`}
+                    onChange={onOptionChange}
+                    checked={type==="Other"}
                 />
                 <p>{"\n"}</p>
                 <FloatingLabel
@@ -88,7 +95,7 @@ const Report =()=>{
                 <Form.Control ref={descriptionRef} type="title" placeholder="Title" />
                 </FloatingLabel>
             </Card.Body>
-            <Button className="w-25 mx-auto mb-3" variant="primary">Submit Report</Button>
+            <Button onClick={addReport} className="w-25 mx-auto mb-3" variant="primary">Submit Report</Button>
         </Card>
 
     )

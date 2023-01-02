@@ -13,6 +13,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import CountriesList from './components/CountriesList';
 import countries from './countries.json';
 import Report from './components/Report';
+import ReportList from './components/ReportList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
@@ -62,7 +63,8 @@ function App() {
           <Route path='/instructor/my-courses' element={<InstructorCourses user={user}/>}/>
           <Route path='/instructor/add-course' element={<AddCourse user={user}/>}/>
           <Route path='/admin' element={<AdminPanel/>}/>
-          <Route path='/report' element={<Report/>}/>
+          <Route path='/report/:id' element={<Report user={user}/>}/>
+          <Route path='/report' element={<ReportList user={user}/>}/>
 
         </Routes>
       </BrowserRouter>

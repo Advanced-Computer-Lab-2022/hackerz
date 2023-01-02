@@ -11,8 +11,9 @@ export default function Course(props) {
   const course = props.course;
   const corp = props.corp;
   const link = "/course/" + course._id;
+
   const reportNavigate = () => {
-    return navigate('/report');
+    return navigate('/report/'+course._id);
   }
   return (
     <Card style={{width:"18%"}} className="m-3">
@@ -27,8 +28,8 @@ export default function Course(props) {
               <span style={{color: "red"}}>FREE</span> 
               : <>for {countries[my_country].currency} {course.price}</>):<></>}</Card.Footer>:<></>}
       </Card.Body>
-      <Button onClick={reportNavigate} style={{backgroundColor: 'red'}} className="w-15 mx-auto mb-3" variant="primary"
-      courseid={course._id}>Report</Button>
+
+      <Button onClick={reportNavigate} style={{backgroundColor: 'red'}} className="w-15 mx-auto mb-3" variant="primary">Report</Button>
     </Card>
   )
 }

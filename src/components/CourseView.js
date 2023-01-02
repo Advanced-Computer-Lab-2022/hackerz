@@ -10,7 +10,6 @@ const APIURL = "http://localhost:8000";
 export default function CourseView(props) {
     const [course, setCourse] = useState([]);
     let {id} = useParams();
-    
 
     const fetchCourse = async () => {
         const response = await axios.get(APIURL + '/courses/' + id)

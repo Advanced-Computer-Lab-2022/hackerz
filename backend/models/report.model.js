@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 const reportSchema = new Schema({
   repType: { type: String, required: true },
   description: { type: String, required: true },
-  user: {//user id
-    type: mongoose.Schema.Types.ObjectId,
+  user: {
+    type: String,
     required: true,
     ref: 'User'
 },
@@ -15,12 +15,11 @@ course: {//course id
     required: true,
     ref: 'Course'
 },
-userType: {
+status: {
   type: String,
-  // required: true,
   enum : ['Unseen','Pending','Resloved'],
   default: 'Unseen'
-},
+}
 }, {
   timestamps: true,
 });
